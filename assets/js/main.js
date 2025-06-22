@@ -114,27 +114,11 @@
   /**
    * Mobile nav toggle
    */
-  on('click', '.mobile-nav-toggle', function(e) {
+  on('click', '.header-toggle', function(e) {
     select('#header').classList.toggle('header-show')
-    select('.mobile-nav-toggle').classList.toggle('bi-list')
-    select('.mobile-nav-toggle').classList.toggle('bi-x')
+    select('.header-toggle').classList.toggle('bi-list')
+    select('.header-toggle').classList.toggle('bi-x')
   })
-
-  /**
-   * Mobile nav toggle - Alternative implementation
-   */
-  document.addEventListener("DOMContentLoaded", function () {
-    const toggle = document.querySelector(".mobile-nav-toggle");
-    const nav = document.querySelector("#navmenu");
-
-    if (toggle && nav) {
-      toggle.addEventListener("click", () => {
-        nav.classList.toggle("navmenu-active");
-        toggle.classList.toggle("bi-x"); // change icon to 'X' when open
-        select('#header').classList.toggle('header-show');
-      });
-    }
-  });
 
   /**
    * Hide mobile nav on same-page/hash links
@@ -142,29 +126,65 @@
   on('click', '#navmenu a', function(e) {
     if (select(this.hash)) {
       select('#header').classList.remove('header-show')
-      select('.mobile-nav-toggle').classList.toggle('bi-list')
-      select('.mobile-nav-toggle').classList.toggle('bi-x')
+      select('.header-toggle').classList.remove('bi-x')
+      select('.header-toggle').classList.add('bi-list')
     }
   }, true)
 
   /**
-   * Toggle mobile nav dropdowns
+   * Close mobile nav when clicking outside
    */
-  const navDropdowns = select('.navmenu .dropdown > a', true)
+  document.addEventListener('click', function(e) {
+    const header = select('#header')
+    const toggle = select('.header-toggle')
+    
+    if (header && toggle) {
+      if (!header.contains(e.target) && !toggle.contains(e.target)) {
+        header.classList.remove('header-show')
+        toggle.classList.remove('bi-x')
+        toggle.classList.add('bi-list')
+      }
+    }
+  })
 
-  navDropdowns.forEach(el => {
-    el.addEventListener('click', function(event) {
-      if (document.querySelector('.mobile-nav-toggle').classList.contains('bi-list')) {
-        event.preventDefault()
-        this.classList.toggle('active')
-        this.nextElementSibling.classList.toggle('dropdown-active')
-
-        let dropDownIndicator = this.querySelector('.toggle-dropdown')
-        dropDownIndicator.classList.toggle('bi-chevron-up')
-        dropDownIndicator.classList.toggle('bi-chevron-down')
+  /**
+   * Active link management
+   */
+  const setActiveLink = () => {
+    const sections = document.querySelectorAll('section[id]')
+    const navLinks = document.querySelectorAll('#navmenu a')
+    
+    let current = ''
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop
+      const sectionHeight = section.clientHeight
+      if (window.scrollY >= (sectionTop - 200)) {
+        current = section.getAttribute('id')
       }
     })
-  })
+
+    navLinks.forEach(link => {
+      link.classList.remove('active')
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active')
+      }
+    })
+  }
+
+  window.addEventListener('scroll', setActiveLink)
+  window.addEventListener('load', setActiveLink)
+
+  /**
+   * Toggle mobile nav dropdowns
+   */
+  document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {
+    navmenu.addEventListener('click', function(e) {
+      e.preventDefault();
+      this.parentNode.classList.toggle('active');
+      this.parentNode.nextElementSibling.classList.toggle('dropdown-active');
+      e.stopImmediatePropagation();
+    });
+  });
 
   /**
    * Scroll top button
@@ -376,6 +396,97 @@
       // Check on load
       checkSkills();
     }
+  });
+
+  /**
+   * Sidebar navigation functionality
+   */
+  document.addEventListener("DOMContentLoaded", () => {
+    console.log('DOM Content Loaded - Setting up sidebar');
+    
+    const sidebar = document.querySelector('.sidebar');
+    const mobileToggle = document.querySelector('.mobile-nav-toggle');
+    const navLinks = document.querySelectorAll('.nav-menu a');
+
+    console.log('Sidebar element:', sidebar);
+    console.log('Mobile toggle element:', mobileToggle);
+    console.log('Nav links found:', navLinks.length);
+
+    // Mobile toggle functionality
+    if (mobileToggle && sidebar) {
+      console.log('Setting up mobile toggle');
+      mobileToggle.addEventListener('click', () => {
+        console.log('Mobile toggle clicked');
+        sidebar.classList.toggle('active');
+        const icon = mobileToggle.querySelector('i');
+        if (sidebar.classList.contains('active')) {
+          icon.className = 'bi bi-x';
+          console.log('Sidebar opened');
+        } else {
+          icon.className = 'bi bi-list';
+          console.log('Sidebar closed');
+        }
+      });
+    } else {
+      console.error('Mobile toggle or sidebar not found');
+    }
+
+    // Active link highlighting
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        console.log('Nav link clicked:', this.textContent);
+        // Remove active class from all links
+        navLinks.forEach(l => l.classList.remove('active'));
+        // Add active class to clicked link
+        this.classList.add('active');
+        
+        // Close sidebar on mobile after clicking a link
+        if (window.innerWidth <= 768) {
+          sidebar.classList.remove('active');
+          const icon = mobileToggle.querySelector('i');
+          icon.className = 'bi bi-list';
+        }
+      });
+    });
+
+    // Close sidebar when clicking outside on mobile
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768) {
+        if (!sidebar.contains(e.target) && !mobileToggle.contains(e.target)) {
+          sidebar.classList.remove('active');
+          const icon = mobileToggle.querySelector('i');
+          icon.className = 'bi bi-list';
+        }
+      }
+    });
+
+    // Set initial active link based on current section
+    const setActiveLink = () => {
+      const sections = document.querySelectorAll('section[id]');
+      const scrollPos = window.scrollY + 100;
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        const navLink = document.querySelector(`.nav-menu a[href="#${sectionId}"]`);
+
+        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+          navLinks.forEach(link => link.classList.remove('active'));
+          if (navLink) {
+            navLink.classList.add('active');
+          }
+        }
+      });
+    };
+
+    // Set active link on scroll
+    window.addEventListener('scroll', setActiveLink);
+    
+    // Set initial active link
+    setActiveLink();
+    
+    console.log('Sidebar setup complete');
   });
 
 })();
