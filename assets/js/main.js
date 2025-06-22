@@ -175,6 +175,44 @@
   window.addEventListener('load', setActiveLink)
 
   /**
+   * Dark Mode Toggle
+   */
+  const darkModeToggle = select('#darkModeToggle')
+  const html = document.documentElement
+  
+  // Check for saved theme preference or default to light mode
+  const currentTheme = localStorage.getItem('theme') || 'light'
+  html.setAttribute('data-theme', currentTheme)
+  
+  // Update button state based on current theme
+  const updateToggleButton = () => {
+    const isDark = html.getAttribute('data-theme') === 'dark'
+    if (darkModeToggle) {
+      if (isDark) {
+        darkModeToggle.setAttribute('aria-label', 'Switch to light mode')
+      } else {
+        darkModeToggle.setAttribute('aria-label', 'Switch to dark mode')
+      }
+    }
+  }
+  
+  // Toggle theme function
+  const toggleTheme = () => {
+    const currentTheme = html.getAttribute('data-theme')
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark'
+    
+    html.setAttribute('data-theme', newTheme)
+    localStorage.setItem('theme', newTheme)
+    updateToggleButton()
+  }
+  
+  // Add event listener to toggle button
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener('click', toggleTheme)
+    updateToggleButton()
+  }
+
+  /**
    * Toggle mobile nav dropdowns
    */
   document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {

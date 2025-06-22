@@ -52,9 +52,244 @@
   --contrast-color: #ffffff;
 }
 
+/* Dark Mode Variables */
+[data-theme="dark"] {
+  --background-color: #0a0a0a;
+  --default-color: #e0e0e0;
+  --heading-color: #ffffff;
+  --accent-color: #00d4ff;
+  --surface-color: #1a1a1a;
+  --contrast-color: #ffffff;
+  --nav-color: #b0b0b0;
+  --nav-hover-color: #ffffff;
+  --nav-mobile-background-color: #0a0a0a;
+  --nav-dropdown-background-color: #0a0a0a;
+  --nav-dropdown-color: #b0b0b0;
+  --nav-dropdown-hover-color: #ffffff;
+}
+
+[data-theme="dark"] .header {
+  background-color: #1a1a1a;
+  border-right-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .light-background {
+  --background-color: #1a1a1a;
+  --surface-color: #2a2a2a;
+}
+
+[data-theme="dark"] .dark-background {
+  --background-color: #0a0a0a;
+  --surface-color: #1a1a1a;
+}
+
+/* Dark Mode Toggle Styles */
+.dark-mode-toggle {
+  text-align: center;
+  margin: 25px 0;
+  padding: 0 15px;
+}
+
+.dark-mode-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background-size: 200% 200%;
+  border: none;
+  border-radius: 50px;
+  padding: 16px 28px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  font-family: var(--nav-font);
+}
+
+.dark-mode-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.8s ease;
+}
+
+.dark-mode-btn:hover::before {
+  left: 100%;
+}
+
+.dark-mode-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.dark-mode-btn:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+.dark-mode-btn:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+  background-position: 100% 100%;
+}
+
+.dark-mode-btn:active {
+  transform: translateY(-2px) scale(0.97);
+}
+
+.dark-mode-btn .light-icon,
+.dark-mode-btn .dark-icon {
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 20px;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.dark-mode-btn .light-text,
+.dark-mode-btn .dark-text {
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 13px;
+  font-weight: 700;
+  position: relative;
+  z-index: 2;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Light mode (default) */
+.dark-mode-btn .light-icon,
+.dark-mode-btn .light-text {
+  opacity: 0;
+  transform: rotate(-180deg) scale(0.3);
+  position: absolute;
+}
+
+.dark-mode-btn .dark-icon,
+.dark-mode-btn .dark-text {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* Dark mode */
+[data-theme="dark"] .dark-mode-btn {
+  background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+  background-size: 200% 200%;
+  box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+[data-theme="dark"] .dark-mode-btn:hover {
+  box-shadow: 0 20px 60px rgba(0, 212, 255, 0.5);
+  background-position: 100% 100%;
+  border-color: rgba(0, 212, 255, 0.4);
+}
+
+[data-theme="dark"] .dark-mode-btn .light-icon,
+[data-theme="dark"] .dark-mode-btn .light-text {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+  position: relative;
+}
+
+[data-theme="dark"] .dark-mode-btn .dark-icon,
+[data-theme="dark"] .dark-mode-btn .dark-text {
+  opacity: 0;
+  transform: rotate(180deg) scale(0.3);
+  position: absolute;
+}
+
+/* Pulse animation for icons */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.dark-mode-btn:hover .light-icon,
+.dark-mode-btn:hover .dark-icon {
+  animation: pulse 2s infinite;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.dark-mode-btn {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Glow effect */
+.dark-mode-btn::before {
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+/* Modern border gradient */
+.dark-mode-btn {
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.dark-mode-btn::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #667eea);
+  background-size: 400% 400%;
+  border-radius: 50px;
+  z-index: -1;
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
 /* Smooth scroll */
 :root {
   scroll-behavior: smooth;
+}
+
+/* Universal transition for theme changes */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /*--------------------------------------------------------------
@@ -64,6 +299,7 @@ body {
   color: var(--default-color);
   background-color: var(--background-color);
   font-family: var(--default-font);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a {
@@ -85,6 +321,7 @@ h5,
 h6 {
   color: var(--heading-color);
   font-family: var(--heading-font);
+  transition: color 0.3s ease;
 }
 
 /* PHP Email Form Messages
@@ -1431,4 +1668,62 @@ section,
   margin-top: 4px;
   font-size: 13px;
   text-align: center;
+}
+
+/* Additional Dark Mode Component Styles */
+[data-theme="dark"] .stats .stats-item {
+  background-color: #2a2a2a;
+  border: 1px solid #3a3a3a;
+}
+
+[data-theme="dark"] .skills .progress-bar-wrap {
+  background-color: #2a2a2a;
+}
+
+[data-theme="dark"] .contact .info-wrap {
+  background-color: #2a2a2a;
+}
+
+[data-theme="dark"] .contact .php-email-form input[type=text],
+[data-theme="dark"] .contact .php-email-form input[type=email],
+[data-theme="dark"] .contact .php-email-form textarea {
+  background-color: #2a2a2a;
+  border-color: #3a3a3a;
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .contact .php-email-form input[type=text]:focus,
+[data-theme="dark"] .contact .php-email-form input[type=email]:focus,
+[data-theme="dark"] .contact .php-email-form textarea:focus {
+  border-color: #00d4ff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 212, 255, 0.25);
+}
+
+[data-theme="dark"] .contact .php-email-form input[type=text]::placeholder,
+[data-theme="dark"] .contact .php-email-form input[type=email]::placeholder,
+[data-theme="dark"] .contact .php-email-form textarea::placeholder {
+  color: #888;
+}
+
+[data-theme="dark"] .footer {
+  background-color: #1a1a1a !important;
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .scroll-top {
+  background-color: #00d4ff;
+  color: #000;
+}
+
+[data-theme="dark"] .scroll-top:hover {
+  background-color: #00b8e6;
+}
+
+[data-theme="dark"] .header .header-toggle {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .header .header-toggle:hover {
+  color: #00d4ff;
 }
