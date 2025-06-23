@@ -497,8 +497,9 @@
               </div>
             </form>
             <!-- Thank-you message -->
-            <div id="thank-you" style="display: none; margin-top: 20px; color: green; font-weight: 500; text-align:center;">
-              ✅ Thanks for contacting me! You'll be replied shortly.
+            <div id="thank-you" class="alert alert-success shadow-lg rounded-pill px-4 py-3 fade" style="display: none; margin-top: 20px; font-weight: 500; text-align:center; font-size: 1.1rem; letter-spacing: 0.5px; box-shadow: 0 4px 24px rgba(0, 200, 83, 0.15);">
+              <span id="thank-you-icon" style="font-size:1.5rem; vertical-align:middle; margin-right:8px;">✅</span>
+              <span id="thank-you-text">Thanks for contacting me! You'll be replied shortly.</span>
             </div>
           </div>
 
@@ -578,6 +579,26 @@
   <script>
     const form = document.getElementById("contact-form");
     const thankYouMessage = document.getElementById("thank-you");
+    const thankYouIcon = document.getElementById("thank-you-icon");
+    const thankYouText = document.getElementById("thank-you-text");
+
+    function showThankYou({success, message}) {
+      thankYouMessage.classList.remove('alert-danger', 'alert-success');
+      thankYouMessage.classList.add(success ? 'alert-success' : 'alert-danger');
+      thankYouIcon.textContent = success ? '✅' : '❌';
+      thankYouMessage.style.boxShadow = success
+        ? '0 4px 24px rgba(0, 200, 83, 0.15)'
+        : '0 4px 24px rgba(220, 53, 69, 0.15)';
+      thankYouText.textContent = message;
+      thankYouMessage.style.display = "block";
+      thankYouMessage.classList.add('show');
+      setTimeout(() => {
+        thankYouMessage.classList.remove('show');
+        setTimeout(() => {
+          thankYouMessage.style.display = "none";
+        }, 300);
+      }, 4000);
+    }
 
     form.addEventListener("submit", function (e) {
       e.preventDefault(); // Stop page reload
@@ -592,12 +613,7 @@
       .then(response => {
         if (response.ok) {
           form.reset();
-          thankYouMessage.innerHTML = "✅ Thanks for contacting me! You'll be replied shortly.";
-          thankYouMessage.style.color = "green";
-          thankYouMessage.style.display = "block";
-          setTimeout(() => {
-            thankYouMessage.style.display = "none";
-          }, 4000);
+          showThankYou({success: true, message: "Thanks for contacting me! You'll be replied shortly."});
         } else {
           return response.json().then(data => {
             throw new Error(data.error || "Something went wrong.");
@@ -605,12 +621,7 @@
         }
       })
       .catch(error => {
-        thankYouMessage.innerHTML = "❌ " + error.message;
-        thankYouMessage.style.color = "red";
-        thankYouMessage.style.display = "block";
-        setTimeout(() => {
-          thankYouMessage.style.display = "none";
-        }, 4000);
+        showThankYou({success: false, message: error.message});
       });
     });
   </script>
