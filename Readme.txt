@@ -1,6 +1,5 @@
-Thanks for downloading this template!
+© 2025 Ayush Kumar Singh. All rights reserved.
 
-Template Name: iPortfolio
-Template URL: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
-Author: BootstrapMade.com
-License: https://bootstrapmade.com/license/
+Unauthorized copying, reproduction, or distribution of this code, in whole or in part, is strictly prohibited.
+
+Custom modifications and original content are protected under copyright law.
