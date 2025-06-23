@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Ayush Kumar Singh - Portfolio</title>
-  <meta content="Student passionate about tech, web development, design, and modern UI experiences" name="description">
+  <title>Ayush Singh – Developer & Portfolio</title>
+  <meta content="Welcome to Ayush Singh's official portfolio. Projects, contact info, and more." name="description">
   <meta content="web development, design, student, tech, portfolio" name="keywords">
 
   <!-- Favicons -->
@@ -473,36 +473,34 @@
           </div>
 
           <div class="col-lg-7">
-            <form action="https://formsubmit.co/ayushpurnia919@gmail.com" method="POST" class="contact-form" data-aos="fade-up" data-aos-delay="200">
+            <form id="contact-form" class="contact-form" data-aos="fade-up" data-aos-delay="200">
               <div class="row gy-4">
-
                 <div class="col-md-6">
-                  <label for="name-field" class="pb-2">Your Name</label>
-                  <input type="text" name="name" id="name-field" class="form-control" required>
+                  <label for="name" class="pb-2">Your Name</label>
+                  <input type="text" id="name" name="name" class="form-control" required>
                 </div>
-
                 <div class="col-md-6">
-                  <label for="email-field" class="pb-2">Your Email</label>
-                  <input type="email" class="form-control" name="email" id="email-field" required>
+                  <label for="email" class="pb-2">Your Email</label>
+                  <input type="email" id="email" name="email" class="form-control" required>
                 </div>
-
                 <div class="col-md-12">
-                  <label for="subject-field" class="pb-2">Subject</label>
-                  <input type="text" class="form-control" name="subject" id="subject-field" required>
+                  <label for="subject" class="pb-2">Subject</label>
+                  <input type="text" id="subject" name="subject" class="form-control">
                 </div>
-
                 <div class="col-md-12">
-                  <label for="message-field" class="pb-2">Message</label>
-                  <textarea class="form-control" name="message" rows="10" id="message-field" required></textarea>
+                  <label for="message" class="pb-2">Your Message</label>
+                  <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
                 </div>
-
                 <div class="col-md-12 text-center">
-                  <button type="submit" class="btn btn-primary">Send Message</button>
+                  <button type="submit" class="btn btn-primary">Send</button>
                 </div>
-
               </div>
             </form>
-          </div><!-- End Contact Form -->
+            <!-- Thank-you message -->
+            <div id="thank-you" style="display: none; margin-top: 20px; color: green; font-weight: 500; text-align:center;">
+              ✅ Thanks for contacting me! You'll be replied shortly.
+            </div>
+          </div>
 
         </div>
 
@@ -576,6 +574,46 @@
 
   <!-- Admin Integration Script -->
   <script src="assets/js/admin-integration.js"></script>
+
+  <script>
+    const form = document.getElementById("contact-form");
+    const thankYouMessage = document.getElementById("thank-you");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault(); // Stop page reload
+
+      const formData = new FormData(form);
+
+      fetch("https://formspree.io/f/mkgbbwak", {
+        method: "POST",
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(response => {
+        if (response.ok) {
+          form.reset();
+          thankYouMessage.innerHTML = "✅ Thanks for contacting me! You'll be replied shortly.";
+          thankYouMessage.style.color = "green";
+          thankYouMessage.style.display = "block";
+          setTimeout(() => {
+            thankYouMessage.style.display = "none";
+          }, 4000);
+        } else {
+          return response.json().then(data => {
+            throw new Error(data.error || "Something went wrong.");
+          });
+        }
+      })
+      .catch(error => {
+        thankYouMessage.innerHTML = "❌ " + error.message;
+        thankYouMessage.style.color = "red";
+        thankYouMessage.style.display = "block";
+        setTimeout(() => {
+          thankYouMessage.style.display = "none";
+        }, 4000);
+      });
+    });
+  </script>
 
 </body>
 
