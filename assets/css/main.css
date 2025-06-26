@@ -69,8 +69,8 @@
 }
 
 [data-theme="dark"] .header {
-  background-color: #1a1a1a;
-  border-right-color: rgba(255, 255, 255, 0.1);
+  background-color: #1a1a1a !important;
+  border-right: 1px solid rgba(255,255,255,0.1) !important;
 }
 
 [data-theme="dark"] .light-background {
@@ -287,9 +287,14 @@
   scroll-behavior: smooth;
 }
 
-/* Universal transition for theme changes */
-* {
+/* Remove universal transition for theme changes to improve performance */
+/* * {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+} */
+
+/* Instead, add transitions only to body, header, navmenu, and .main for smooth theme switching */
+body, .header, .main, .header .navmenu ul li a {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 /*--------------------------------------------------------------
@@ -299,13 +304,11 @@ body {
   color: var(--default-color);
   background-color: var(--background-color);
   font-family: var(--default-font);
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a {
   color: var(--accent-color);
   text-decoration: none;
-  transition: 0.3s;
 }
 
 a:hover {
@@ -321,7 +324,6 @@ h5,
 h6 {
   color: var(--heading-color);
   font-family: var(--heading-font);
-  transition: color 0.3s ease;
 }
 
 /* PHP Email Form Messages
@@ -381,7 +383,7 @@ h6 {
 --------------------------------------------------------------*/
 .header {
   color: #333333;
-  background-color: #1a1a1a;
+  background-color: #ffffff;
   position: fixed;
   top: 0;
   left: 0;
@@ -391,7 +393,7 @@ h6 {
   transition: all ease-in-out 0.3s;
   overflow-y: auto;
   z-index: 997;
-  border-right: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  border-right: 1px solid #e0e0e0;
   font-family: var(--nav-font);
   display: flex;
   flex-direction: column;
@@ -504,7 +506,7 @@ h6 {
 .header .navmenu ul li a {
   display: flex;
   align-items: center;
-  color: #ffffff;
+  color: #333333;
   padding: 12px 15px;
   margin-bottom: 8px;
   transition: 0.3s;
@@ -512,6 +514,7 @@ h6 {
   font-family: var(--nav-font);
   border-radius: 50px;
   text-decoration: none;
+  background: transparent;
 }
 
 .header .navmenu ul li a i {
@@ -522,8 +525,8 @@ h6 {
 
 .header .navmenu ul li a:hover,
 .header .navmenu ul li a.active {
-  color: #ffffff;
-  background-color: var(--accent-color);
+  color: #fff;
+  background-color: #149ddd;
 }
 
 /* Main Content */
@@ -542,16 +545,13 @@ h6 {
     background-color: var(--nav-mobile-background-color);
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   }
-  
   .header.header-show {
     left: 0;
   }
-  
   .main {
     margin-left: 0;
     width: 100%;
   }
-  
   .header .header-toggle {
     display: block !important;
   }
@@ -561,101 +561,14 @@ h6 {
   .header .header-toggle {
     display: none !important;
   }
-  
   .main {
     margin-left: 300px;
     width: calc(100% - 300px);
   }
 }
 
-/*--------------------------------------------------------------
-# Navigation Menu
---------------------------------------------------------------*/
-.navmenu {
-  padding: 0;
-  z-index: 9997;
-}
-
-.navmenu ul {
-  list-style: none;
-  padding: 0 0 20px 0;
-  margin: 0;
-}
-
-.navmenu a,
-.navmenu a:focus {
-  color: var(--nav-color);
-  padding: 15px 10px;
-  font-family: var(--nav-font);
-  font-size: 16px;
-  font-weight: 400;
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  transition: 0.3s;
-  width: 100%;
-}
-
-.navmenu a .navicon,
-.navmenu a:focus .navicon {
-  font-size: 20px;
-  margin-right: 10px;
-}
-
-.navmenu a:hover,
-.navmenu .active,
-.navmenu .active:focus {
-  color: var(--nav-hover-color);
-}
-
-.navmenu a:hover .navicon,
-.navmenu .active .navicon,
-.navmenu .active:focus .navicon {
-  color: var(--accent-color);
-}
-
-.navmenu .active .toggle-dropdown,
-.navmenu .active:focus .toggle-dropdown {
-  background-color: var(--accent-color);
-  color: var(--contrast-color);
-  transform: rotate(180deg);
-}
-
-.navmenu .dropdown {
-  display: block;
-}
-
-.navmenu .dropdown a,
-.navmenu .dropdown a:focus {
-  color: --nav-dropdown-color;
-}
-
-.navmenu .dropdown a:hover,
-.navmenu .dropdown .active,
-.navmenu .dropdown .active:focus {
-  color: var(--nav-dropdown-hover-color);
-}
-
-.navmenu .dropdown ul {
-  position: static;
-  display: none;
-  z-index: 99;
-  padding: 5px 10px;
-  margin: 5px 10px;
-  background-color: var(--nav-dropdown-background-color);
-  border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
-  box-shadow: none;
-  transition: all 0.5s ease-in-out;
-}
-
-.navmenu .dropdown ul ul {
-  background-color: rgba(33, 37, 41, 0.1);
-}
-
-.navmenu .dropdown>.dropdown-active {
-  display: block;
-  background-color: rgba(33, 37, 41, 0.03);
-}
+/* Remove horizontal nav and navmenu-horizontal styles */
+.navmenu-horizontal { display: none !important; }
 
 /*--------------------------------------------------------------
 # Global Footer
@@ -1726,4 +1639,47 @@ section,
 
 [data-theme="dark"] .header .header-toggle:hover {
   color: #00d4ff;
+}
+
+/* Sidebar text color sync with theme */
+.header .logo h1,
+.header .profile-img,
+.header .navmenu ul li a,
+.header .navmenu ul li a i {
+  color: #333 !important;
+}
+[data-theme="dark"] .header .logo h1,
+[data-theme="dark"] .header .profile-img,
+[data-theme="dark"] .header .navmenu ul li a,
+[data-theme="dark"] .header .navmenu ul li a i {
+  color: #fff !important;
+}
+
+/* Ensure nav colors change for both light and dark mode on all screen sizes */
+.header {
+  background-color: #ffffff;
+  border-right: 1px solid #e0e0e0;
+}
+.header .navmenu ul li a {
+  color: #333333;
+  background: transparent;
+}
+.header .navmenu ul li a.active,
+.header .navmenu ul li a:hover {
+  background-color: #149ddd;
+  color: #fff;
+}
+
+[data-theme="dark"] .header {
+  background-color: #1a1a1a !important;
+  border-right: 1px solid rgba(255,255,255,0.1) !important;
+}
+[data-theme="dark"] .header .navmenu ul li a {
+  color: #fff !important;
+  background: transparent !important;
+}
+[data-theme="dark"] .header .navmenu ul li a.active,
+[data-theme="dark"] .header .navmenu ul li a:hover {
+  background-color: #00d4ff !important;
+  color: #222 !important;
 }
