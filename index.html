@@ -36,6 +36,303 @@
     main.main {
       padding-bottom: 80px; /* Adjust if footer height changes */
     }
+
+    /* Map Container Styling */
+    .map-container {
+      position: relative;
+      z-index: 3;
+      height: 300px;
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .map-container iframe {
+      z-index: 3;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      padding: 0px;
+      border-width: 0px;
+      margin: 0px;
+      left: 0px;
+      top: 0px;
+      touch-action: pan-x pan-y;
+      border-radius: 10px;
+    }
+
+    .map-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 4;
+      pointer-events: none;
+      border-radius: 10px;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
+    }
+
+    /* Contact Form Dark Mode Styling */
+    .contact-form {
+      transition: all 0.3s ease;
+    }
+
+    [data-theme="dark"] .contact-form {
+      background: #1a1a1a !important;
+      border-color: #333 !important;
+      color: #fff;
+    }
+
+    [data-theme="dark"] .contact-form h3 {
+      color: #fff !important;
+    }
+
+    [data-theme="dark"] .contact-form .form-label {
+      color: #fff !important;
+    }
+
+    [data-theme="dark"] .contact-form .form-control {
+      background: #2a2a2a !important;
+      border-color: #444 !important;
+      color: #fff !important;
+    }
+
+    [data-theme="dark"] .contact-form .form-control::placeholder {
+      color: #aaa !important;
+    }
+
+    [data-theme="dark"] .contact-form .form-control:focus {
+      background: #333 !important;
+      border-color: #007bff !important;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important;
+    }
+
+    [data-theme="dark"] .contact-form .btn-primary {
+      background: #007bff !important;
+      border-color: #007bff !important;
+    }
+
+    [data-theme="dark"] .contact-form .btn-primary:hover {
+      background: #0056b3 !important;
+      border-color: #0056b3 !important;
+    }
+
+    /* New Loading Screen Styling */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease-out;
+    }
+
+    .loader-container {
+      text-align: center;
+      color: white;
+    }
+
+    .circle-loader {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 30px;
+    }
+
+    .circle {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: white;
+      animation: circleRotate 2s linear infinite;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+
+    .circle:nth-child(1) {
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      animation-delay: 0s;
+    }
+
+    .circle:nth-child(2) {
+      top: 15px;
+      right: 15px;
+      animation-delay: 0.25s;
+    }
+
+    .circle:nth-child(3) {
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      animation-delay: 0.5s;
+    }
+
+    .circle:nth-child(4) {
+      bottom: 15px;
+      right: 15px;
+      animation-delay: 0.75s;
+    }
+
+    .circle:nth-child(5) {
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      animation-delay: 1s;
+    }
+
+    .circle:nth-child(6) {
+      bottom: 15px;
+      left: 15px;
+      animation-delay: 1.25s;
+    }
+
+    .circle:nth-child(7) {
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      animation-delay: 1.5s;
+    }
+
+    .circle:nth-child(8) {
+      top: 15px;
+      left: 15px;
+      animation-delay: 1.75s;
+    }
+
+    @keyframes circleRotate {
+      0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.5) rotate(180deg);
+        opacity: 0.7;
+      }
+      100% {
+        transform: scale(1) rotate(360deg);
+        opacity: 1;
+      }
+    }
+
+    .loader-text {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    .dots {
+      animation: dots 1.5s infinite;
+      display: inline-block;
+      width: 20px;
+    }
+
+    @keyframes dots {
+      0%, 20% {
+        opacity: 0;
+        transform: translateY(0);
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(-5px);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(0);
+      }
+    }
+
+    /* Dark mode for preloader */
+    [data-theme="dark"] #preloader {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    }
+
+    [data-theme="dark"] .circle {
+      background: #00d4ff;
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+    }
+
+    /* Modern Welcome Text Styling */
+    .welcome-text {
+      font-size: 1.8rem;
+      font-weight: 300;
+      margin-bottom: 20px;
+      color: rgba(255, 255, 255, 0.9);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      position: relative;
+    }
+
+    .typed-welcome {
+      background: linear-gradient(45deg, #fff, #00d4ff, #fff);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 3s ease-in-out infinite;
+      font-weight: 400;
+    }
+
+    .welcome-text .typed-cursor {
+      color: #00d4ff;
+      font-weight: 400;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    /* Responsive welcome text */
+    @media (max-width: 768px) {
+      .welcome-text {
+        font-size: 1.4rem;
+        letter-spacing: 1px;
+      }
+    }
+
+    /* Hero Section Background Fix */
+    .hero {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h2,
+    .hero p {
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
   </style>
 
 </head>
@@ -54,13 +351,8 @@
     </a>
 
     <div class="social-links text-center">
-      <a href="tel:+918603637243"><i class="bi bi-telephone"></i></a>
       <a href="https://github.com/ayushsingh9199"><i class="bi bi-github"></i></a>
       <a href="https://instagram.com/ayushhsingh_919"><i class="bi bi-instagram"></i></a>
-     <a href="https://wa.me/918603637243" target="_blank">
-  <i class="bi bi-whatsapp"></i>
-</a>
-
     </div>
 
     <nav id="navmenu" class="navmenu">
@@ -95,6 +387,7 @@
       <img src="assets/img/hero-bg.jpg" alt="" data-aos="fade-in" class="">
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <p class="welcome-text"><span class="typed-welcome"></span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
         <h2>Ayush Kumar Singh</h2>
         <p>I'm <span class="typed" data-typed-items="Student, Web Developer, Designer, Tech Enthusiast">Student</span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
       </div>
@@ -126,7 +419,6 @@
                 <ul>
                   <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>28 November 2008</span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>ayushsingh.pro</span></li>
-                  <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+91 8603637243</span></li>
                   <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>Purnia, Bihar, India</span></li>
                 </ul>
               </div>
@@ -281,19 +573,18 @@
       <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
 
         <!-- Summary -->
-        <h3 class="resume-title">👨‍💻 Professional Summary</h3>
+        <h3 class="resume-title">👨‍💻 Summary</h3>
         <div class="resume-item pb-0">
           <h4>Ayush Kumar Singh</h4>
           <p><em>🚀 Self-driven and creative web developer with hands-on experience in frontend technologies and UI/UX design. Passionate about building efficient, user-centric digital solutions and continuously enhancing technical proficiency.</em></p>
           <ul>
             <li>📍 Bihar, India</li>
-            <li>📞 +91 8603637243</li>
             <li>✉️ ayushpurnia919@gmail.com</li>
           </ul>
         </div><!-- End Summary -->
 
         <!-- Self-Learning / Certifications -->
-        <h3 class="resume-title">📚 Professional Development</h3>
+        <h3 class="resume-title">📚 Development</h3>
         <div class="resume-item">
           <h4>Ongoing Technical Advancement</h4>
           <h5>2023 – Present</h5>
@@ -421,109 +712,140 @@
 
  </section><!-- /Skills & Learning Focus Section -->
 
+  <!-- Contact Section -->
+  <section id="contact" class="contact section">
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact section">
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Contact</h2>
+      <p>Get in touch with me for collaborations, projects, or just to say hello!</p>
+    </div><!-- End Section Title -->
 
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Contact</h2>
-        <p>Get in touch with me for collaborations, projects, or just to say hello!</p>
-      </div><!-- End Section Title -->
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <div class="row gy-5">
+        
+        <!-- Contact Information -->
+        <div class="col-lg-5">
+          <div class="info-wrap" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="mb-4 text-center">Contact Information</h3>
+            
+            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
+              <i class="bi bi-geo-alt flex-shrink-0"></i>
+              <div>
+                <h3>Address</h3>
+                <p><a href="https://maps.google.com/?q=Purnia,India" target="_blank">Purnia, India</a></p>
+              </div>
+            </div>
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+              <i class="bi bi-envelope flex-shrink-0"></i>
+              <div>
+                <h3>Email Us</h3>
+                <p><a href="mailto:ayushpurnia919@gmail.com">ayushpurnia919@gmail.com</a></p>
+              </div>
+            </div>
 
-        <div class="row gy-4">
+            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+              <i class="bi bi-globe flex-shrink-0"></i>
+              <div>
+                <h3>Website</h3>
+                <p><a href="https://ayushsingh.pro" target="_blank">ayushsingh.pro</a></p>
+              </div>
+            </div>
 
-          <div class="col-lg-5">
+            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="600">
+              <i class="bi bi-instagram flex-shrink-0"></i>
+              <div>
+                <h3>Instagram</h3>
+                <p><a href="https://instagram.com/ayushhsingh_919" target="_blank">@ayushhsingh_919</a></p>
+              </div>
+            </div>
 
-            <div class="info-wrap">
-              <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
-                <i class="bi bi-geo-alt flex-shrink-0"></i>
-                <div>
-                  <h3>Address</h3>
-                  <p><a href="https://maps.google.com/?q=Bihar,India" target="_blank" style="text-decoration: none; color: inherit;">Purnia Bihar, India</a></p>
-                </div>
-              </div><!-- End Info Item -->
-
-              <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
-                <i class="bi bi-telephone flex-shrink-0"></i>
-                <div>
-                  <h3>Call Us</h3>
-                  <p><a href="tel:+918603637243" style="text-decoration: none; color: inherit;">+91 8603637243</a></p>
-                </div>
-              </div><!-- End Info Item -->
-
-              <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
-                <i class="bi bi-envelope flex-shrink-0"></i>
-                <div>
-                  <h3>Email Us</h3>
-                  <p><a href="mailto:ayushpurnia919@gmail.com" style="text-decoration: none; color: inherit;">ayushpurnia919@gmail.com</a></p>
-                </div>
-              </div><!-- End Info Item -->
-
-              <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="500">
-                <i class="bi bi-globe flex-shrink-0"></i>
-                <div>
-                  <h3>Website</h3>
-                  <p><a href="https://ayushsingh.pro" target="_blank" style="text-decoration: none; color: inherit;">ayushsingh.pro</a></p>
-                </div>
-              </div><!-- End Info Item -->
-
-              <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="600">
-                <i class="bi bi-instagram flex-shrink-0"></i>
-                <div>
-                  <h3>Instagram</h3>
-                  <p><a href="https://instagram.com/ayushhsingh_919" target="_blank" style="text-decoration: none; color: inherit;">@ayushhsingh_919</a></p>
-                </div>
-              </div><!-- End Info Item -->
-
-              <iframe src="https://www.google.com/maps?q=Purnia,+Bihar,+India&t=k&output=embed" frameborder="0" style="border:0; width: 100%; height: 270px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <!-- Map Section -->
+            <div class="map-container" data-aos="fade-up" data-aos-delay="700">
+              <iframe 
+                src="https://www.google.com/maps?q=Purnia&t=h&z=12&output=embed" 
+                frameborder="0" 
+                style="border:0; width: 100%; height: 300px; border-radius: 10px;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
             </div>
           </div>
+        </div>
 
-          <div class="col-lg-7">
-            <form id="contact-form" class="contact-form" data-aos="fade-up" data-aos-delay="200">
+        <!-- Contact Form -->
+        <div class="col-lg-7">
+          <div class="contact-form" data-aos="fade-up" data-aos-delay="200" style="background: #fff; border-radius: 15px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #e9ecef;">
+            
+            <h3 class="mb-4 text-center" style="color: #333; font-weight: 600; font-size: 2rem; margin-bottom: 30px;">
+              <i class="bi bi-chat-dots" style="margin-right: 10px; color: #007bff;"></i>
+              Send Me a Message
+            </h3>
+            
+            <form id="contact-form">
               <div class="row gy-4">
                 <div class="col-md-6">
-                  <label for="name" class="pb-2">Your Name</label>
-                  <input type="text" id="name" name="name" class="form-control" required>
+                  <label for="name" class="form-label" style="color: #333; font-weight: 500; margin-bottom: 8px;">
+                    <i class="bi bi-person" style="margin-right: 8px; color: #007bff;"></i>Your Name
+                  </label>
+                  <input type="text" id="name" name="name" class="form-control" required style="border: 1px solid #dee2e6; border-radius: 8px; padding: 12px 16px; transition: all 0.3s ease;">
                 </div>
                 <div class="col-md-6">
-                  <label for="email" class="pb-2">Your Email</label>
-                  <input type="email" id="email" name="email" class="form-control" required>
+                  <label for="email" class="form-label" style="color: #333; font-weight: 500; margin-bottom: 8px;">
+                    <i class="bi bi-envelope" style="margin-right: 8px; color: #007bff;"></i>Your Email
+                  </label>
+                  <input type="email" id="email" name="email" class="form-control" required style="border: 1px solid #dee2e6; border-radius: 8px; padding: 12px 16px; transition: all 0.3s ease;">
                 </div>
                 <div class="col-md-12">
-                  <label for="subject" class="pb-2">Subject</label>
-                  <input type="text" id="subject" name="subject" class="form-control">
+                  <label for="subject" class="form-label" style="color: #333; font-weight: 500; margin-bottom: 8px;">
+                    <i class="bi bi-tag" style="margin-right: 8px; color: #007bff;"></i>Subject
+                  </label>
+                  <input type="text" id="subject" name="subject" class="form-control" placeholder="What's this about?" style="border: 1px solid #dee2e6; border-radius: 8px; padding: 12px 16px; transition: all 0.3s ease;">
                 </div>
                 <div class="col-md-12">
-                  <label for="message" class="pb-2">Your Message</label>
-                  <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
+                  <label for="message" class="form-label" style="color: #333; font-weight: 500; margin-bottom: 8px;">
+                    <i class="bi bi-chat-text" style="margin-right: 8px; color: #007bff;"></i>Your Message
+                  </label>
+                  <textarea id="message" name="message" class="form-control" rows="6" required placeholder="Tell me about your project or just say hello!" style="border: 1px solid #dee2e6; border-radius: 8px; padding: 12px 16px; transition: all 0.3s ease; resize: vertical;"></textarea>
                 </div>
                 <div class="col-md-12 text-center">
-                  <button type="submit" class="btn btn-primary">Send</button>
+                  <button type="submit" class="btn btn-primary" style="border-radius: 8px; padding: 12px 30px; font-weight: 500; transition: all 0.3s ease;">
+                    <i class="bi bi-send" style="margin-right: 8px;"></i> Send Message
+                  </button>
                 </div>
               </div>
             </form>
+
             <!-- Thank-you message -->
             <div id="thank-you" class="alert alert-success shadow-lg rounded-pill px-4 py-3 fade" style="display: none; margin-top: 20px; font-weight: 500; text-align:center; font-size: 1.1rem; letter-spacing: 0.5px; box-shadow: 0 4px 24px rgba(0, 200, 83, 0.15);">
               <span id="thank-you-icon" style="font-size:1.5rem; vertical-align:middle; margin-right:8px;">✅</span>
               <span id="thank-you-text">Thanks for contacting me! You'll be replied shortly.</span>
             </div>
           </div>
-
         </div>
 
       </div>
 
-    </section><!-- /Contact Section -->
+    </div>
+  </section><!-- /Contact Section -->
 
   </main>
 
 <footer class="footer py-4 bg-dark text-white">
   <div class="container">
     <div class="row justify-content-center align-items-start text-center">
+      <!-- Main Section -->
+      <div class="col-12 col-md-3 mb-3 mb-md-0">
+        <h5 class="fw-bold text-white">Main</h5>
+        <ul class="list-unstyled">
+          <li><a href="index.html" class="text-decoration-none text-secondary">Home</a></li>
+          <li><a href="contact.html" class="text-decoration-none text-secondary">Contact</a></li>
+          <li><a href="my-gears.html" class="text-decoration-none text-secondary">My gears</a></li>
+        </ul>
+      </div>
+      
       <!-- Legal Section -->
       <div class="col-12 col-md-3 mb-3 mb-md-0">
         <h5 class="fw-bold text-white">Legal</h5>
@@ -546,9 +868,6 @@
 </footer>
 
 
-
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Preloader -->
   <div id="preloader">
@@ -587,10 +906,40 @@
   <!-- Main JS File -->
   <script src="assets/js/main.js" defer></script>
 
-  <!-- Admin Integration Script -->
-  <script src="assets/js/admin-integration.js"></script>
+
 
   <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 1000,
+      easing: "ease-in-out",
+      once: true,
+      mirror: false
+    });
+
+    // Initialize Welcome Text Typing Animation
+    setTimeout(() => {
+      new Typed('.typed-welcome', {
+        strings: ['Welcome to my website'],
+        typeSpeed: 80,
+        backSpeed: 30,
+        backDelay: 3000,
+        loop: false,
+        showCursor: true,
+        cursorChar: '|',
+        autoInsertCss: true
+      });
+    }, 500);
+
+    // Preloader
+    window.addEventListener('load', () => {
+      const preloader = document.getElementById('preloader');
+      if (preloader) {
+        preloader.style.display = 'none';
+      }
+    });
+
+    // Contact Form Handling
     const form = document.getElementById("contact-form");
     const thankYouMessage = document.getElementById("thank-you");
     const thankYouIcon = document.getElementById("thank-you-icon");
@@ -614,30 +963,32 @@
       }, 4000);
     }
 
-    form.addEventListener("submit", function (e) {
-      e.preventDefault(); // Stop page reload
+    if (form) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-      const formData = new FormData(form);
+        const formData = new FormData(form);
 
-      fetch("https://formspree.io/f/mkgbbwak", {
-        method: "POST",
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(response => {
-        if (response.ok) {
-          form.reset();
-          showThankYou({success: true, message: "Thanks for contacting me! You'll be replied shortly."});
-        } else {
-          return response.json().then(data => {
-            throw new Error(data.error || "Something went wrong.");
-          });
-        }
-      })
-      .catch(error => {
-        showThankYou({success: false, message: error.message});
+        fetch("https://formspree.io/f/mkgbbwak", {
+          method: "POST",
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        })
+        .then(response => {
+          if (response.ok) {
+            form.reset();
+            showThankYou({success: true, message: "Thanks for contacting me! You'll be replied shortly."});
+          } else {
+            return response.json().then(data => {
+              throw new Error(data.error || "Something went wrong.");
+            });
+          }
+        })
+        .catch(error => {
+          showThankYou({success: false, message: error.message});
+        });
       });
-    });
+    }
   </script>
 
 </body>
