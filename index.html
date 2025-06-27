@@ -42,6 +42,9 @@
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MorphSVGPlugin.min.js"></script>
+
   <style>
     /* Scroll Progress Bar */
     .scroll-progress-bar {
@@ -371,6 +374,151 @@
       color: white;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    #entry-loader.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .loader-glow-ring {
+      width: 54px;
+      height: 54px;
+      border: 6px solid rgba(180,220,255,0.25);
+      border-top: 6px solid #6ec1e4;
+      border-radius: 50%;
+      box-shadow: 0 0 18px 2px #b3e0ff, 0 0 0 0 #fff;
+      animation: spin 1.1s cubic-bezier(.68,-0.55,.27,1.55) infinite;
+      background: transparent;
+    }
+    .loader-glass {
+      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
+      border-radius: 24px;
+      padding: 36px 44px;
+      background: rgba(255,255,255,0.35);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .dot-loader {
+      display: flex;
+      gap: 10px;
+    }
+    .dot-loader span {
+      width: 16px;
+      height: 16px;
+      background: #6ec1e4;
+      border-radius: 50%;
+      display: inline-block;
+      animation: dot-bounce 1s infinite alternate;
+    }
+    .dot-loader span:nth-child(2) { animation-delay: 0.2s; }
+    .dot-loader span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes dot-bounce {
+      to { transform: translateY(-18px); background: #b3e0ff; }
+    }
+    .ayush-bounce-loader {
+      display: flex;
+      gap: 18px;
+    }
+    .ayush-bounce-loader span {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 1.5rem;
+      font-family: 'Poppins', Arial, sans-serif;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: ayush-bounce 1.2s infinite;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+      letter-spacing: 1px;
+      user-select: none;
+    }
+    .ayush-bounce-loader span:nth-child(1) { animation-delay: 0s; }
+    .ayush-bounce-loader span:nth-child(2) { animation-delay: 0.15s; }
+    .ayush-bounce-loader span:nth-child(3) { animation-delay: 0.3s; }
+    .ayush-bounce-loader span:nth-child(4) { animation-delay: 0.45s; }
+    .ayush-bounce-loader span:nth-child(5) { animation-delay: 0.6s; }
+    @keyframes ayush-bounce {
+      0%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-32px); }
+      60% { transform: translateY(-18px); }
+    }
+    #entry-loader.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .ayush-fluid-loader {
+      display: flex;
+      gap: 18px;
+      position: relative;
+      align-items: flex-end;
+      min-width: 220px;
+      min-height: 60px;
+      justify-content: center;
+    }
+    .ayush-fluid-loader .ball {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: ayush-bounce 1.1s cubic-bezier(.68,-0.55,.27,1.55) 1;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+      user-select: none;
+      opacity: 1;
+      position: relative;
+      z-index: 2;
+      transition: transform 0.7s cubic-bezier(.68,-0.55,.27,1.55), opacity 0.4s;
+    }
+    .ayush-fluid-loader .ball:nth-child(1) { animation-delay: 0s; }
+    .ayush-fluid-loader .ball:nth-child(2) { animation-delay: 0.12s; }
+    .ayush-fluid-loader .ball:nth-child(3) { animation-delay: 0.24s; }
+    .ayush-fluid-loader .ball:nth-child(4) { animation-delay: 0.36s; }
+    @keyframes ayush-bounce {
+      0%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-28px); }
+      60% { transform: translateY(-14px); }
+    }
+    .ayush-fluid-loader .ayush-text {
+      position: absolute;
+      left: 0; right: 0; top: 0; bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.1rem;
+      font-family: 'Poppins', Arial, sans-serif;
+      font-weight: 800;
+      color: #222;
+      letter-spacing: 0.18em;
+      opacity: 0;
+      z-index: 3;
+      transform: scale(0.7);
+      transition: opacity 0.5s 0.1s, transform 0.5s 0.1s;
+      background: none;
+      pointer-events: none;
+    }
+    .ayush-fluid-loader.merged .ball {
+      transform: translateY(0) scale(0.7) translateX(0);
+      opacity: 0;
+      transition: transform 0.7s, opacity 0.4s 0.2s;
+    }
+    .ayush-fluid-loader.merged .ayush-text {
+      opacity: 1;
+      transform: scale(1.08);
+      transition: opacity 0.5s 0.1s, transform 0.5s 0.1s;
+    }
+    #entry-loader.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
   </style>
 
 </head>
@@ -379,6 +527,18 @@
 
   <!-- Scroll Progress Bar -->
   <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+
+  <!-- SVG Morph Loader -->
+  <div id="entry-loader" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(255,255,255,0.97);display:flex;align-items:center;justify-content:center;z-index:99999;transition:opacity 0.6s;">
+    <svg id="ayush-loader-svg" width="320" height="100" viewBox="0 0 320 100">
+      <g id="balls">
+        <circle id="ball1" cx="50" cy="70" r="18" fill="#ff595e" />
+        <circle id="ball2" cx="110" cy="70" r="18" fill="#ffca3a" />
+        <circle id="ball3" cx="170" cy="70" r="18" fill="#8ac926" />
+        <circle id="ball4" cx="230" cy="70" r="18" fill="#1982c4" />
+      </g>
+    </svg>
+  </div>
 
   <header id="header" class="header d-flex flex-column">
     <i class="header-toggle d-xl-none bi bi-list"></i>
@@ -906,8 +1066,6 @@
   </div>
 </footer>
 
-
-
   <!-- Preloader -->
   <div id="preloader">
     <svg class="futuristic-spinner" width="80" height="80" viewBox="0 0 80 80">
@@ -944,8 +1102,6 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js" defer></script>
-
-
 
   <script>
     // Initialize AOS
@@ -1037,6 +1193,19 @@
       const scrollPercentage = (scrollTop / scrollHeight) * 100;
       
       scrollProgressBar.style.width = scrollPercentage + '%';
+    });
+
+    // SVG Bouncing Balls Loader Animation
+    window.addEventListener('load', function() {
+      const loader = document.getElementById('entry-loader');
+      const svg = document.getElementById('ayush-loader-svg');
+      const balls = [svg.getElementById('ball1'), svg.getElementById('ball2'), svg.getElementById('ball3'), svg.getElementById('ball4')];
+      // Bounce animation, then fade out loader quickly
+      gsap.to(balls, { y: -32, duration: 0.28, yoyo: true, repeat: 1, stagger: 0.08, ease: 'power1.inOut', onComplete: hideLoader });
+      function hideLoader() {
+        loader.classList.add('fade-out');
+        setTimeout(() => loader.style.display = 'none', 400);
+      }
     });
   </script>
 
