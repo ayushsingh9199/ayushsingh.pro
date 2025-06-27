@@ -43,6 +43,29 @@
   <link href="assets/css/main.css" rel="stylesheet">
 
   <style>
+    /* Scroll Progress Bar */
+    .scroll-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, #2563eb 0%, #3b82f6 100%);
+      z-index: 9999;
+      transition: width 0.1s ease;
+      box-shadow: 0 1px 4px rgba(37,99,235,0.2);
+    }
+    
+    [data-theme="dark"] .scroll-progress-bar {
+      background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
+      box-shadow: 0 1px 4px rgba(59,130,246,0.3);
+    }
+    
+    [data-theme="light"] .scroll-progress-bar {
+      background: linear-gradient(90deg, #2563eb 0%, #3b82f6 100%);
+      box-shadow: 0 1px 4px rgba(37,99,235,0.2);
+    }
+
     /* Ensure footer is above nav and not hidden */
     footer.footer {
       position: relative;
@@ -354,6 +377,9 @@
 
 <body class="index-page">
 
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+
   <header id="header" class="header d-flex flex-column">
     <i class="header-toggle d-xl-none bi bi-list"></i>
 
@@ -372,11 +398,11 @@
 
     <nav id="navmenu" class="navmenu">
       <ul>
-        <li><a href="#hero" class="active"><i class="bi bi-house navicon"></i>Home</a></li>
-        <li><a href="#about"><i class="bi bi-person navicon"></i> About</a></li>
-        <li><a href="#skills"><i class="bi bi-person navicon"></i> skills</a></li>
-        <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i> Resume</a></li>
-        <li><a href="#contact"><i class="bi bi-envelope navicon"></i> Contact</a></li>
+        <li><a href="index.html"><i class="bi bi-house navicon"></i>Home</a></li>
+        <li><a href="index.html#about"><i class="bi bi-person navicon"></i> About</a></li>
+        <li><a href="index.html#skills"><i class="bi bi-person navicon"></i> Skills</a></li>
+        <li><a href="index.html#resume"><i class="bi bi-file-earmark-text navicon"></i> Resume</a></li>
+        <li><a href="index.html#contact"><i class="bi bi-envelope navicon"></i> Contact</a></li>
       </ul>
     </nav>
 
@@ -845,24 +871,25 @@
 
   </main>
 
-<footer class="footer py-4 bg-dark text-white">
+<footer class="footer py-4">
   <div class="container">
     <div class="row justify-content-center align-items-start text-center">
       <!-- Main Section -->
       <div class="col-12 col-md-3 mb-3 mb-md-0">
-        <h5 class="fw-bold text-white">Main</h5>
+        <h5 class="fw-bold">Main</h5>
         <ul class="list-unstyled">
-          <li><a href="index.html" class="text-decoration-none text-secondary">Home</a></li>
-          <li><a href="contact.html" class="text-decoration-none text-secondary">Contact</a></li>
-          <li><a href="my-gears.html" class="text-decoration-none text-secondary">My gears</a></li>
+          <li><a href="index.html" class="text-decoration-none">Home</a></li>
+          <li><a href="contact.html" class="text-decoration-none">Contact</a></li>
+          <li><a href="my-gears.html" class="text-decoration-none">My gears</a></li>
+          <li><a href="my projects.html" class="text-decoration-none">My projects</a></li>
         </ul>
       </div>
       
       <!-- Legal Section -->
       <div class="col-12 col-md-3 mb-3 mb-md-0">
-        <h5 class="fw-bold text-white">Legal</h5>
+        <h5 class="fw-bold">Legal</h5>
         <ul class="list-unstyled">
-          <li><a href="terms.html" class="text-decoration-none text-secondary">Terms</a></li>
+          <li><a href="terms.html" class="text-decoration-none">Terms</a></li>
         </ul>
       </div>
     </div>
@@ -872,7 +899,7 @@
           <p class="mb-0">© <span>Copyright</span> <strong class="px-1 sitename">Ayush Kumar Singh</strong> <span>All Rights Reserved</span></p>
         </div>
         <div class="credits">
-          Designed & Built by <a href="https://ayushsingh.pro" target="_blank" rel="noopener noreferrer" class="text-decoration-none text-info">Ayush Kumar Singh</a>
+          Designed & Built by <a href="https://ayushsingh.pro" target="_blank" rel="noopener noreferrer" class="text-decoration-none">Ayush Kumar Singh</a>
         </div>
       </div>
     </div>
@@ -1001,6 +1028,16 @@
         });
       });
     }
+    
+    // Scroll Progress Bar Functionality
+    window.addEventListener('scroll', function() {
+      const scrollProgressBar = document.getElementById('scrollProgressBar');
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercentage = (scrollTop / scrollHeight) * 100;
+      
+      scrollProgressBar.style.width = scrollPercentage + '%';
+    });
   </script>
 
 </body>
