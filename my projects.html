@@ -5,10 +5,14 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>My Projects | Ayush Singh</title>
-  <meta content="Explore my latest web development projects, including portfolio websites, task managers, and weather dashboards. View my work and technical skills." name="description">
-  <meta content="web development projects, portfolio, React, JavaScript, HTML, CSS, frontend developer, Ayush Singh projects" name="keywords">
+  <meta
+    content="Explore my latest web development projects, including portfolio websites, task managers, and weather dashboards. View my work and technical skills."
+    name="description">
+  <meta
+    content="web development projects, portfolio, React, JavaScript, HTML, CSS, frontend developer, Ayush Singh projects"
+    name="keywords">
   <meta name="author" content="Ayush Singh">
-  
+
   <!-- Favicons -->
   <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
@@ -29,7 +33,9 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -49,13 +55,15 @@
       background: var(--bs-body-bg, #f8f9fa);
       min-height: 100vh;
     }
+
     [data-theme="dark"] body {
       background: #1a1b1e !important;
     }
+
     [data-theme="light"] body {
       background: #f8f9fa !important;
     }
-    
+
     /* Page Title Animation */
     h1.page-title {
       text-align: center;
@@ -74,13 +82,14 @@
       opacity: 0;
       animation: fadeInUp 0.6s ease-out forwards;
     }
+
     @keyframes fadeInUp {
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
-    
+
     .page-title-accent {
       display: block;
       width: 60px;
@@ -91,11 +100,17 @@
       opacity: 0.8;
       animation: growWidth 0.8s ease-out 0.2s both;
     }
+
     @keyframes growWidth {
-      from { width: 0; }
-      to { width: 60px; }
+      from {
+        width: 0;
+      }
+
+      to {
+        width: 60px;
+      }
     }
-    
+
     p.subheading {
       text-align: center;
       margin-bottom: 40px;
@@ -106,10 +121,13 @@
       opacity: 0;
       animation: fadeIn 0.6s ease-out 0.4s forwards;
     }
+
     @keyframes fadeIn {
-      to { opacity: 1; }
+      to {
+        opacity: 1;
+      }
     }
-    
+
     .section-title {
       font-size: 1.3em;
       font-weight: 700;
@@ -123,7 +141,7 @@
       opacity: 0;
       animation: fadeIn 0.6s ease-out 0.6s forwards;
     }
-    
+
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -131,13 +149,13 @@
       margin-bottom: 40px;
       padding-bottom: 40px;
     }
-    
+
     .project-card {
       border-radius: 16px !important;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04) !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04) !important;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      background: rgba(255,255,255,0.95);
+      background: rgba(255, 255, 255, 0.95);
       position: relative;
       z-index: 1;
       opacity: 0;
@@ -145,25 +163,34 @@
       border: none !important;
       min-height: 400px;
     }
+
     @keyframes cardFadeIn {
       to {
         opacity: 1;
       }
     }
-    
-    .project-card:nth-child(1) { animation-delay: 0.8s; }
-    .project-card:nth-child(2) { animation-delay: 0.9s; }
-    .project-card:nth-child(3) { animation-delay: 1.0s; }
-    
-    [data-theme="dark"] .project-card {
-      background: rgba(30,32,36,0.95);
+
+    .project-card:nth-child(1) {
+      animation-delay: 0.8s;
     }
-    
+
+    .project-card:nth-child(2) {
+      animation-delay: 0.9s;
+    }
+
+    .project-card:nth-child(3) {
+      animation-delay: 1.0s;
+    }
+
+    [data-theme="dark"] .project-card {
+      background: rgba(30, 32, 36, 0.95);
+    }
+
     .project-card:hover {
-      box-shadow: 0 8px 32px 0 rgba(0,0,0,0.12), 0 4px 16px 0 rgba(0,0,0,0.08);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.12), 0 4px 16px 0 rgba(0, 0, 0, 0.08);
       transform: translateY(-4px);
     }
-    
+
     .project-card .accent-bar {
       height: 3px !important;
       width: 100% !important;
@@ -171,7 +198,7 @@
       margin-bottom: 0 !important;
       border-radius: 16px 16px 0 0 !important;
     }
-    
+
     .project-image {
       width: 100%;
       height: 250px;
@@ -180,20 +207,20 @@
       transition: transform 0.3s ease;
       background: #f8f9fa;
     }
-    
+
     [data-theme="dark"] .project-image {
       background: #2d3748;
     }
-    
+
     .project-card:hover .project-image {
       transform: scale(1.01);
     }
-    
+
     .project-card .p-4 {
       padding: 2.5rem !important;
       background: transparent;
     }
-    
+
     .project-card h3 {
       font-size: 1.4em;
       font-weight: 700;
@@ -201,7 +228,7 @@
       letter-spacing: 0.5px;
       position: relative;
     }
-    
+
     .project-card h3::after {
       content: '';
       position: absolute;
@@ -212,25 +239,25 @@
       background: linear-gradient(90deg, #2563eb, #3b82f6);
       transition: width 0.3s ease;
     }
-    
+
     .project-card:hover h3::after {
       width: 100%;
     }
-    
+
     .project-card p {
       font-size: 1.1em;
       margin: 0 0 1rem 0;
       line-height: 1.8;
       font-weight: 400;
     }
-    
+
     .project-tags {
       margin-bottom: 1.5rem;
     }
-    
+
     .tag {
       display: inline-block;
-      background: rgba(37,99,235,0.1);
+      background: rgba(37, 99, 235, 0.1);
       color: #2563eb;
       font-size: 0.85em;
       padding: 4px 12px;
@@ -240,18 +267,18 @@
       font-weight: 500;
       transition: all 0.3s ease;
     }
-    
+
     [data-theme="dark"] .tag {
-      background: rgba(59,130,246,0.2);
+      background: rgba(59, 130, 246, 0.2);
       color: #60a5fa;
     }
-    
+
     .tag:hover {
       background: #2563eb;
       color: white;
       transform: translateY(-1px);
     }
-    
+
     .project-link {
       display: inline-flex;
       align-items: center;
@@ -264,60 +291,72 @@
       font-weight: 600;
       font-size: 0.95em;
       transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(37,99,235,0.2);
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
     }
-    
+
     .project-link:hover {
       transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(37,99,235,0.3);
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
       color: #fff;
     }
-    
+
     @media (max-width: 768px) {
       .projects-grid {
         grid-template-columns: 1fr;
         gap: 30px;
       }
+
       .project-card {
         min-height: 350px;
       }
+
       .project-image {
         height: 200px;
       }
+
       h1.page-title {
         font-size: 2em;
       }
+
       .project-card .p-4 {
         padding: 2rem !important;
       }
     }
+
     @media (max-width: 600px) {
       .project-card {
         min-height: 300px;
       }
+
       .project-image {
         height: 180px;
       }
+
       .project-card .p-4 {
         padding: 1.5rem !important;
       }
     }
+
     [data-theme="dark"] .project-card h3,
     [data-theme="dark"] .project-card p {
       color: #e8eaed !important;
     }
+
     [data-theme="light"] .project-card h3,
     [data-theme="light"] .project-card p {
       color: #212529 !important;
     }
+
     [data-theme="dark"] .page-title {
       color: #e8eaed !important;
     }
+
     [data-theme="light"] .page-title {
       color: #212529 !important;
     }
   </style>
 </head>
+
 <body class="index-page">
 
   <header id="header" class="header d-flex flex-column">
@@ -362,12 +401,12 @@
         <img src="assets/img/hero.png" alt="Portfolio Website Screenshot" class="project-image">
         <div class="p-4">
           <h3 class="text-body-emphasis">Portfolio Website</h3>
-          <p class="text-body">A personal website to showcase my skills, experience, and projects. Responsive, fast, and visually appealing with modern design principles.</p>
+          <p class="text-body">A personal website to showcase my skills, experience, and projects. Responsive, fast, and
+            visually appealing with modern design principles.</p>
           <div class="project-tags">
             <span class="tag">HTML</span>
             <span class="tag">CSS</span>
             <span class="tag">JavaScript</span>
-            <span class="tag">Bootstrap</span>
           </div>
           <a href="https://ayushsingh.pro" class="project-link" target="_blank">
             <i class="bi bi-arrow-up-right"></i> View Project
@@ -379,7 +418,8 @@
         <img src="assets/img/hero.png" alt="Task Manager App Screenshot" class="project-image">
         <div class="p-4">
           <h3 class="text-body-emphasis">Task Manager App</h3>
-          <p class="text-body">A simple web app to manage daily tasks with features like add, edit, and delete tasks. Clean interface and persistent storage.</p>
+          <p class="text-body">A simple web app to manage daily tasks with features like add, edit, and delete tasks.
+            Clean interface and persistent storage.</p>
           <div class="project-tags">
             <span class="tag">React</span>
             <span class="tag">JavaScript</span>
@@ -396,11 +436,12 @@
         <img src="assets/img/hero.png" alt="Weather Dashboard Screenshot" class="project-image">
         <div class="p-4">
           <h3 class="text-body-emphasis">Weather Dashboard</h3>
-          <p class="text-body">A dashboard that displays current weather and forecasts for any city using a public weather API. Modern cards and charts.</p>
+          <p class="text-body">A dashboard that displays current weather and forecasts for any city using a public
+            weather API. Modern cards and charts.</p>
           <div class="project-tags">
             <span class="tag">API</span>
             <span class="tag">JavaScript</span>
-            <span class="tag">Bootstrap</span>
+
             <span class="tag">Fetch</span>
           </div>
           <a href="#" class="project-link" target="_blank">
@@ -435,10 +476,12 @@
       <div class="row">
         <div class="col-12 text-center mt-3">
           <div class="copyright mb-2">
-            <p class="mb-0">© <span>Copyright</span> <strong class="px-1 sitename">Ayush Kumar Singh</strong> <span>All Rights Reserved</span></p>
+            <p class="mb-0">© <span>Copyright</span> <strong class="px-1 sitename">Ayush Kumar Singh</strong> <span>All
+                Rights Reserved</span></p>
           </div>
           <div class="credits">
-            Designed & Built by <a href="https://ayushsingh.pro" target="_blank" rel="noopener noreferrer" class="text-decoration-none">Ayush Kumar Singh</a>
+            Designed & Built by <a href="https://ayushsingh.pro" target="_blank" rel="noopener noreferrer"
+              class="text-decoration-none">Ayush Kumar Singh</a>
           </div>
         </div>
       </div>
@@ -455,4 +498,5 @@
   </script>
 
 </body>
+
 </html>
