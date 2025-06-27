@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms and Conditions – AyushSingh.pro</title>
+    <meta name="description" content="Read the terms and conditions for using AyushSingh.pro, the personal website and portfolio of Ayush Singh." />
+    <meta name="theme-color" content="#149ddd" />
+    <meta property="og:title" content="Terms and Conditions – AyushSingh.pro" />
+    <meta property="og:description" content="Read the terms and conditions for using AyushSingh.pro, the personal website and portfolio of Ayush Singh." />
+    <meta property="og:image" content="assets/img/pfp.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ayushsingh.pro/terms.html" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Terms and Conditions – AyushSingh.pro" />
+    <meta name="twitter:description" content="Read the terms and conditions for using AyushSingh.pro, the personal website and portfolio of Ayush Singh." />
+    <meta name="twitter:image" content="assets/img/pfp.jpg" />
+    <link rel="canonical" href="https://ayushsingh.pro/terms.html" />
     <link rel="icon" href="assets/img/logo.jpg" type="image/jpeg">
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/main.css" rel="stylesheet">
@@ -132,9 +144,28 @@
             .terms-container h1 { font-size: 1.3rem; }
             .terms-container h2 { font-size: 1.1rem; }
         }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        #entry-loader.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
     </style>
 </head>
-<body>
+<body class="index-page">
+    <!-- SVG Bouncing Balls Loader -->
+    <div id="entry-loader" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(255,255,255,0.97);display:flex;align-items:center;justify-content:center;z-index:99999;transition:opacity 0.6s;">
+        <svg id="ayush-loader-svg" width="320" height="100" viewBox="0 0 320 100">
+            <g id="balls">
+                <circle id="ball1" cx="50" cy="70" r="18" fill="#ff595e" />
+                <circle id="ball2" cx="110" cy="70" r="18" fill="#ffca3a" />
+                <circle id="ball3" cx="170" cy="70" r="18" fill="#8ac926" />
+                <circle id="ball4" cx="230" cy="70" r="18" fill="#1982c4" />
+            </g>
+        </svg>
+    </div>
     <header id="header" class="header d-flex flex-column">
       <i class="header-toggle d-xl-none bi bi-list"></i>
       <div class="profile-img text-center">
@@ -241,6 +272,7 @@
     </div>
     </main>
     <script src="assets/js/main.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script>
         // Sync dark mode with main site
         function syncDarkMode() {
@@ -265,6 +297,18 @@
                 darkModeToggle.addEventListener('click', function() {
                     setTimeout(syncDarkMode, 100); // Small delay to ensure localStorage is updated
                 });
+            }
+        });
+        // SVG Bouncing Balls Loader Animation
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('entry-loader');
+            const svg = document.getElementById('ayush-loader-svg');
+            const balls = [svg.getElementById('ball1'), svg.getElementById('ball2'), svg.getElementById('ball3'), svg.getElementById('ball4')];
+            // Bounce animation, then fade out loader quickly
+            gsap.to(balls, { y: -32, duration: 0.28, yoyo: true, repeat: 1, stagger: 0.08, ease: 'power1.inOut', onComplete: hideLoader });
+            function hideLoader() {
+                loader.classList.add('fade-out');
+                setTimeout(() => loader.style.display = 'none', 400);
             }
         });
     </script>
