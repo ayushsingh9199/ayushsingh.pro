@@ -397,44 +397,19 @@
   /**
    * Skills animation
    */
-  window.addEventListener('load', () => {
-    let skills = select('.skills .progress .progress-bar', true);
-    let skillsSection = select('#skills');
-    
-    if (skillsSection && skills.length > 0) {
-      let animated = false;
-      
-      let progressBar = () => {
-        if (animated) return;
-        animated = true;
-        
-        skills.forEach((skill) => {
-          const progress = skill.getAttribute('aria-valuenow');
-          skill.style.width = '0%';
-          
-          setTimeout(() => {
-            skill.style.width = progress + '%';
-          }, 100);
+  let skills = select('.skills-animation')
+  if (skills) {
+    let waypoint = new Waypoint({
+      element: document.getElementById('skills'),
+      handler: function() {
+        let progress = select('.skills .progress .progress-bar', true);
+        progress.forEach((el) => {
+          el.style.width = el.getAttribute('aria-valuenow') + '%'
         });
-      }
-      
-      // Check if skills section is in view
-      let checkSkills = () => {
-        let rect = skillsSection.getBoundingClientRect();
-        let windowHeight = window.innerHeight;
-        
-        if (rect.top < windowHeight * 0.8 && rect.bottom > 0) {
-          progressBar();
-        }
-      }
-      
-      // Check on scroll
-      window.addEventListener('scroll', checkSkills);
-      
-      // Check on load
-      checkSkills();
-    }
-  });
+      },
+      offset: '80%'
+    })
+  }
 
   /**
    * Sidebar navigation functionality
@@ -528,3 +503,139 @@
   });
 
 })();
+
+// Google Analytics
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-HQKLRZEG8N');
+
+// Initialize AOS
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof AOS !== 'undefined') {
+    AOS.init({
+      duration: 1000,
+      easing: "ease-in-out",
+      once: true,
+      mirror: false
+    });
+  }
+
+  // Initialize Welcome Text Typing Animation
+  setTimeout(() => {
+    if (typeof Typed !== 'undefined') {
+      new Typed('.typed-welcome', {
+        strings: ['Welcome to my website'],
+        typeSpeed: 80,
+        backSpeed: 30,
+        backDelay: 3000,
+        loop: false,
+        showCursor: true,
+        cursorChar: '|',
+        autoInsertCss: true
+      });
+    }
+  }, 500);
+
+  // Preloader
+  window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+      preloader.style.display = 'none';
+    }
+  });
+
+  // Contact Form Handling
+  const form = document.getElementById("contact-form");
+  const thankYouMessage = document.getElementById("thank-you");
+  const thankYouIcon = document.getElementById("thank-you-icon");
+  const thankYouText = document.getElementById("thank-you-text");
+
+  function showThankYou({success, message}) {
+    thankYouMessage.classList.remove('alert-danger', 'alert-success');
+    thankYouMessage.classList.add(success ? 'alert-success' : 'alert-danger');
+    thankYouIcon.textContent = success ? '✅' : '❌';
+    thankYouMessage.style.boxShadow = success
+      ? '0 4px 24px rgba(0, 200, 83, 0.15)'
+      : '0 4px 24px rgba(220, 53, 69, 0.15)';
+    thankYouText.textContent = message;
+    thankYouMessage.style.display = "block";
+    thankYouMessage.classList.add('show');
+    setTimeout(() => {
+      thankYouMessage.classList.remove('show');
+      setTimeout(() => {
+        thankYouMessage.style.display = "none";
+      }, 300);
+    }, 4000);
+  }
+
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+
+      fetch("https://formspree.io/f/mkgbbwak", {
+        method: "POST",
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(response => {
+        if (response.ok) {
+          form.reset();
+          showThankYou({success: true, message: "Thanks for contacting me! You'll be replied shortly."});
+        } else {
+          return response.json().then(data => {
+            throw new Error(data.error || "Something went wrong.");
+          });
+        }
+      })
+      .catch(error => {
+        showThankYou({success: false, message: error.message});
+      });
+    });
+  }
+  
+  // Scroll Progress Bar Functionality
+  window.addEventListener('scroll', function() {
+    const scrollProgressBar = document.getElementById('scrollProgressBar');
+    if (scrollProgressBar) {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercentage = (scrollTop / scrollHeight) * 100;
+      
+      scrollProgressBar.style.width = scrollPercentage + '%';
+    }
+  });
+
+  // SVG Bouncing Balls Loader Animation
+  window.addEventListener('load', function() {
+    const loader = document.getElementById('entry-loader');
+    const svg = document.getElementById('ayush-loader-svg');
+    
+    if (loader && svg && typeof gsap !== 'undefined') {
+      const balls = [
+        svg.getElementById('ball1'), 
+        svg.getElementById('ball2'), 
+        svg.getElementById('ball3'), 
+        svg.getElementById('ball4')
+      ];
+      
+      // Bounce animation, then fade out loader quickly
+      gsap.to(balls, { 
+        y: -32, 
+        duration: 0.28, 
+        yoyo: true, 
+        repeat: 1, 
+        stagger: 0.08, 
+        ease: 'power1.inOut', 
+        onComplete: hideLoader 
+      });
+      
+      function hideLoader() {
+        loader.classList.add('fade-out');
+        setTimeout(() => loader.style.display = 'none', 400);
+      }
+    }
+  });
+});
