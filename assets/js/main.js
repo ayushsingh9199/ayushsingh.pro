@@ -237,15 +237,23 @@
   }
 
   /**
-   * Preloader
+   * Preloader with extended timing
    */
   let preloader = select('#preloader');
   if (preloader) {
+    const startTime = Date.now();
+    const minLoadTime = 2500; // Minimum 2.5 seconds
+    
     window.addEventListener('load', () => {
-      preloader.classList.add('fade-out');
+      const elapsedTime = Date.now() - startTime;
+      const remainingTime = Math.max(0, minLoadTime - elapsedTime);
+      
       setTimeout(() => {
-        preloader.remove();
-      }, 500);
+        preloader.classList.add('fade-out');
+        setTimeout(() => {
+          preloader.remove();
+        }, 800);
+      }, remainingTime);
     });
   }
 
@@ -597,16 +605,55 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // Scroll Progress Bar Functionality
-  window.addEventListener('scroll', function() {
+  function updateScrollProgress() {
     const scrollProgressBar = document.getElementById('scrollProgressBar');
     if (scrollProgressBar) {
+      // Get current scroll position
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercentage = (scrollTop / scrollHeight) * 100;
       
-      scrollProgressBar.style.width = scrollPercentage + '%';
+      // Get total scrollable height
+      const documentHeight = document.documentElement.scrollHeight;
+      const windowHeight = window.innerHeight;
+      const scrollableHeight = documentHeight - windowHeight;
+      
+      // Calculate percentage
+      let percentage = 0;
+      if (scrollableHeight > 0) {
+        percentage = (scrollTop / scrollableHeight) * 100;
+        // Ensure we reach exactly 100% at the bottom
+        if (scrollTop + windowHeight >= documentHeight) {
+          percentage = 100;
+        }
+        // Clamp between 0 and 100
+        percentage = Math.max(0, Math.min(100, percentage));
+      }
+      
+      scrollProgressBar.style.width = percentage + '%';
     }
-  });
+  }
+  
+  // Use requestAnimationFrame for smooth updates
+  let ticking = false;
+  
+  function requestTick() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateScrollProgress();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+  
+  // Update on scroll with requestAnimationFrame
+  window.addEventListener('scroll', requestTick, { passive: true });
+  
+  // Update on resize
+  window.addEventListener('resize', updateScrollProgress, { passive: true });
+  
+  // Initialize on page load
+  window.addEventListener('load', updateScrollProgress);
+  document.addEventListener('DOMContentLoaded', updateScrollProgress);
 
   // SVG Bouncing Balls Loader Animation
   window.addEventListener('load', function() {
@@ -638,4 +685,5 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   });
-});
+
+})();
