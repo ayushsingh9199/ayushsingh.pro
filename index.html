@@ -59,7 +59,7 @@
     <i class="header-toggle d-xl-none bi bi-list"></i>
 
     <div class="profile-img text-center">
-      <img src="assets/img/pfp.jpg" alt="Profile" class="img-fluid rounded-circle">
+      <img src="assets/img/pfp.jpg" alt="Profile" class="img-fluid rounded-circle" id="profileImage">
     </div>
 
     <a href="index.html" class="logo d-flex align-items-center justify-content-center">
@@ -90,6 +90,29 @@
         <span class="dark-text">Dark Mode</span>
       </button>
     </div>
+
+    <!-- Floating Logout Button -->
+    <div class="floating-logout-container" id="floatingLogoutContainer" style="display: none;">
+      <button class="floating-logout-btn" id="floatingLogoutBtn" aria-label="Logout">
+        <div class="logout-btn-inner">
+          <i class="bi bi-box-arrow-right logout-icon"></i>
+          <span class="logout-text">Logout</span>
+        </div>
+        <div class="logout-rings">
+          <div class="ring ring-1"></div>
+          <div class="ring ring-2"></div>
+          <div class="ring ring-3"></div>
+        </div>
+        <div class="logout-particles">
+          <div class="particle"></div>
+          <div class="particle"></div>
+          <div class="particle"></div>
+          <div class="particle"></div>
+          <div class="particle"></div>
+        </div>
+        <div class="logout-glow"></div>
+      </button>
+    </div>
   </header>
 
   <main class="main">
@@ -103,6 +126,29 @@
         <p class="welcome-text"><span class="typed-welcome"></span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
         <h2>Ayush Kumar Singh</h2>
         <p>I'm <span class="typed" data-typed-items="Student, Web Developer, Designer, Tech Enthusiast">Student</span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
+      </div>
+
+      <!-- Floating Login Button -->
+      <div class="floating-login-container" id="floatingLoginContainer">
+        <a href="login.html" class="floating-login-btn" aria-label="Login to portfolio">
+          <div class="floating-btn-inner">
+            <i class="bi bi-person-circle floating-icon"></i>
+            <span class="floating-text">Login</span>
+          </div>
+          <div class="floating-rings">
+            <div class="ring ring-1"></div>
+            <div class="ring ring-2"></div>
+            <div class="ring ring-3"></div>
+          </div>
+          <div class="floating-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+          </div>
+          <div class="floating-glow"></div>
+        </a>
       </div>
 
     </section><!-- /Hero Section -->
@@ -581,27 +627,186 @@
   </div>
 </footer>
 
-  <!-- Preloader -->
+  <!-- Unique DNA Helix Preloader -->
   <div id="preloader">
-    <svg class="futuristic-spinner" width="80" height="80" viewBox="0 0 80 80">
-      <defs>
-        <linearGradient id="neon-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#00fff0"/>
-          <stop offset="50%" stop-color="#7f00ff"/>
-          <stop offset="100%" stop-color="#00ff85"/>
-        </linearGradient>
-        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-          <feMerge>
-            <feMergeNode in="coloredBlur"/>
-            <feMergeNode in="SourceGraphic"/>
-          </feMerge>
-        </filter>
-      </defs>
-      <circle class="spinner-bg" cx="40" cy="40" r="32" fill="none" stroke="#222" stroke-width="8"/>
-      <circle class="spinner-fg" cx="40" cy="40" r="32" fill="none" stroke="url(#neon-gradient)" stroke-width="8" stroke-linecap="round" stroke-dasharray="60 140" filter="url(#glow)"/>
-      <circle class="spinner-orb" cx="40" cy="8" r="6" fill="#fff" filter="url(#glow)"/>
-    </svg>
+    <div class="dna-container">
+      <!-- DNA Helix Structure -->
+      <div class="dna-helix">
+        <div class="dna-strand left-strand">
+          <div class="base-pair" style="--delay: 0s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 0.1s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 0.2s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 0.3s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 0.4s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 0.5s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 0.6s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 0.7s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 0.8s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 0.9s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 1s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 1.1s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 1.2s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 1.3s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 1.4s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 1.5s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+        </div>
+        
+        <div class="dna-strand right-strand">
+          <div class="base-pair" style="--delay: 0s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 0.1s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 0.2s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 0.3s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 0.4s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 0.5s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 0.6s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 0.7s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 0.8s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 0.9s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 1s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 1.1s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 1.2s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 1.3s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 1.4s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+          <div class="base-pair" style="--delay: 1.5s">
+            <div class="nucleotide"></div>
+            <div class="connection-line"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Orbital Rings -->
+      <div class="orbital-rings">
+        <div class="ring ring-1"></div>
+        <div class="ring ring-2"></div>
+        <div class="ring ring-3"></div>
+      </div>
+      
+      <!-- Floating Particles -->
+      <div class="particles">
+        <div class="particle" style="--x: 10%; --y: 20%; --delay: 0s"></div>
+        <div class="particle" style="--x: 80%; --y: 30%; --delay: 0.5s"></div>
+        <div class="particle" style="--x: 20%; --y: 70%; --delay: 1s"></div>
+        <div class="particle" style="--x: 90%; --y: 80%; --delay: 1.5s"></div>
+        <div class="particle" style="--x: 50%; --y: 10%; --delay: 2s"></div>
+        <div class="particle" style="--x: 30%; --y: 90%; --delay: 2.5s"></div>
+        <div class="particle" style="--x: 70%; --y: 60%; --delay: 3s"></div>
+        <div class="particle" style="--x: 15%; --y: 40%; --delay: 3.5s"></div>
+      </div>
+      
+      <!-- Loading Text -->
+      <div class="loading-text">
+        <div class="text-container">
+          <span class="letter" style="--delay: 0s">I</span>
+          <span class="letter" style="--delay: 0.1s">n</span>
+          <span class="letter" style="--delay: 0.2s">i</span>
+          <span class="letter" style="--delay: 0.3s">t</span>
+          <span class="letter" style="--delay: 0.4s">i</span>
+          <span class="letter" style="--delay: 0.5s">a</span>
+          <span class="letter" style="--delay: 0.6s">l</span>
+          <span class="letter" style="--delay: 0.7s">i</span>
+          <span class="letter" style="--delay: 0.8s">z</span>
+          <span class="letter" style="--delay: 0.9s">i</span>
+          <span class="letter" style="--delay: 1s">n</span>
+          <span class="letter" style="--delay: 1.1s">g</span>
+          <span class="letter" style="--delay: 1.2s">.</span>
+          <span class="letter" style="--delay: 1.3s">.</span>
+          <span class="letter" style="--delay: 1.4s">.</span>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Vendor JS Files -->
@@ -617,6 +822,115 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js" defer></script>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+  <script>
+    // Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCKtIkEDVF8lVE2cyuvft5S4urfN6JKthQ",
+      authDomain: "portfolio-website-e44c0.firebaseapp.com",
+      projectId: "portfolio-website-e44c0",
+      storageBucket: "portfolio-website-e44c0.appspot.com",
+      messagingSenderId: "804676117496",
+      appId: "1:804676117496:web:53d4acf4ec154535f2ec0d",
+      measurementId: "G-CK458DNT87"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // DOM Elements
+    const profileImage = document.getElementById('profileImage');
+    const floatingLoginContainer = document.getElementById('floatingLoginContainer');
+    const floatingLogoutContainer = document.getElementById('floatingLogoutContainer');
+    const floatingLogoutBtn = document.getElementById('floatingLogoutBtn');
+
+    // Function to update UI based on authentication state
+    function updateUIForUser(user) {
+      if (user) {
+        // User is logged in
+        // Update profile picture with user's photo
+        if (user.photoURL) {
+          profileImage.src = user.photoURL;
+        }
+        
+        // Hide login button
+        if (floatingLoginContainer) {
+          floatingLoginContainer.style.display = 'none';
+        }
+        
+        // Show logout button
+        floatingLogoutContainer.style.display = 'block';
+      } else {
+        // User is not logged in
+        // Reset profile picture to default
+        profileImage.src = 'assets/img/pfp.jpg';
+        
+        // Show login button
+        if (floatingLoginContainer) {
+          floatingLoginContainer.style.display = 'block';
+        }
+        
+        // Hide logout button
+        floatingLogoutContainer.style.display = 'none';
+      }
+    }
+
+    // Logout functionality
+    if (floatingLogoutBtn) {
+      floatingLogoutBtn.addEventListener('click', function() {
+        // Add loading state to button
+        const originalContent = this.innerHTML;
+        this.innerHTML = `
+          <div class="logout-btn-inner">
+            <i class="bi bi-arrow-clockwise logout-icon" style="animation: spin 1s linear infinite;"></i>
+            <span class="logout-text">Logging out...</span>
+          </div>
+        `;
+        this.disabled = true;
+        
+        // Sign out the user
+        auth.signOut()
+          .then(() => {
+            console.log('User signed out successfully');
+            
+            // Show success feedback
+            this.innerHTML = `
+              <div class="logout-btn-inner">
+                <i class="bi bi-check-circle-fill logout-icon" style="color: #4CAF50;"></i>
+                <span class="logout-text">Logged out!</span>
+              </div>
+            `;
+            
+            // Reset button after 2 seconds
+            setTimeout(() => {
+              this.innerHTML = originalContent;
+              this.disabled = false;
+            }, 2000);
+            
+            // UI will be updated by the onAuthStateChanged listener
+          })
+          .catch((error) => {
+            console.error('Error signing out:', error);
+            // Restore button content on error
+            this.innerHTML = originalContent;
+            this.disabled = false;
+            
+            // Show error message (optional)
+            alert('Logout failed: ' + error.message);
+          });
+      });
+    }
+
+    // Listen for authentication state changes
+    auth.onAuthStateChanged((user) => {
+      updateUIForUser(user);
+    });
+  </script>
 
 </body>
 

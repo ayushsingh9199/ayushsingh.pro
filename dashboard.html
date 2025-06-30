@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Google OAuth with Firebase</title>
+  <style>
+    body { 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      height: 100vh; 
+      background: #f5f6fa; 
+      font-family: Arial, sans-serif; 
+      margin: 0;
+    }
+    .dashboard-container { 
+      background: #fff; 
+      padding: 2rem 3rem; 
+      border-radius: 12px; 
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08); 
+      text-align: center; 
+      max-width: 500px;
+      width: 90%;
+    }
+    .logout-btn { 
+      background: #e74c3c; 
+      color: #fff; 
+      border: none; 
+      border-radius: 4px; 
+      padding: 0.75rem 2rem; 
+      font-size: 1rem; 
+      cursor: pointer; 
+      margin-top: 1.5rem; 
+      transition: background 0.2s; 
+    }
+    .logout-btn:hover { 
+      background: #c0392b; 
+    }
+    h2 {
+      color: #333;
+      margin-bottom: 1rem;
+    }
+    .user-info {
+      margin: 1rem 0;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+    .user-email {
+      color: #666;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <h2 id="welcomeMsg">Welcome!</h2>
+    <div class="user-info" id="userInfo" style="display: none;">
+      <div class="user-email" id="userEmail"></div>
+    </div>
+    <button class="logout-btn" id="logoutBtn">Logout</button>
+  </div>
+
+  <!-- Firebase App (the core Firebase SDK) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  
+  <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCKtIkEDVF8lVE2cyuvft5S4urfN6JKthQ",
+      authDomain: "portfolio-website-e44c0.firebaseapp.com",
+      projectId: "portfolio-website-e44c0",
+      storageBucket: "portfolio-website-e44c0.appspot.com",
+      messagingSenderId: "804676117496",
+      appId: "1:804676117496:web:53d4acf4ec154535f2ec0d",
+      measurementId: "G-CK458DNT87"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Check authentication state
+    auth.onAuthStateChanged((user) => {
+      if (!user) {
+        // User is not logged in, redirect to login page
+        window.location.href = 'login.html';
+      } else {
+        // User is logged in, display welcome message
+        const welcomeMsg = document.getElementById('welcomeMsg');
+        const userInfo = document.getElementById('userInfo');
+        const userEmail = document.getElementById('userEmail');
+        
+        welcomeMsg.textContent = `Welcome, ${user.displayName || 'User'}!`;
+        userEmail.textContent = user.email;
+        userInfo.style.display = 'block';
+        
+        console.log('User logged in:', user.displayName, user.email);
+      }
+    });
+
+    // Logout button click handler
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+      auth.signOut()
+        .then(() => {
+          console.log('User logged out successfully');
+          window.location.href = 'login.html';
+        })
+        .catch((error) => {
+          console.error('Logout failed:', error);
+          alert('Logout failed: ' + error.message);
+        });
+    });
+  </script>
+</body>
+</html> 
