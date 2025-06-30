@@ -66,9 +66,15 @@
       <h1 class="sitename">Ayush Kumar Singh</h1>
     </a>
 
-    <div class="social-links text-center">
-      <a href="https://github.com/ayushsingh9199"><i class="bi bi-github"></i></a>
-      <a href="https://instagram.com/ayushhsingh_919"><i class="bi bi-instagram"></i></a>
+    <div class="social-links text-center" id="authButtons" style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1rem;">
+      <button class="modern-btn login-btn" id="navbarLoginBtn" style="display:none;">
+        <span class="btn-icon"><i class="bi bi-box-arrow-in-right"></i></span>
+        <span>Sign In</span>
+      </button>
+      <button class="modern-btn logout-btn" id="navbarLogoutBtn" style="display:none;">
+        <span class="btn-icon"><i class="bi bi-box-arrow-right"></i></span>
+        <span>Logout</span>
+      </button>
     </div>
 
     <nav id="navmenu" class="navmenu">
@@ -126,29 +132,6 @@
         <p class="welcome-text"><span class="typed-welcome"></span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
         <h2>Ayush Kumar Singh</h2>
         <p>I'm <span class="typed" data-typed-items="Student, Web Developer, Designer, Tech Enthusiast">Student</span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span><span class="typed-cursor typed-cursor--blink" aria-hidden="true"></span></p>
-      </div>
-
-      <!-- Floating Login Button -->
-      <div class="floating-login-container" id="floatingLoginContainer">
-        <a href="login.html" class="floating-login-btn" aria-label="Login to portfolio">
-          <div class="floating-btn-inner">
-            <i class="bi bi-person-circle floating-icon"></i>
-            <span class="floating-text">Login</span>
-          </div>
-          <div class="floating-rings">
-            <div class="ring ring-1"></div>
-            <div class="ring ring-2"></div>
-            <div class="ring ring-3"></div>
-          </div>
-          <div class="floating-particles">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-          </div>
-          <div class="floating-glow"></div>
-        </a>
       </div>
 
     </section><!-- /Hero Section -->
@@ -613,6 +596,16 @@
           <li><a href="terms.html" class="text-decoration-none">Terms</a></li>
         </ul>
       </div>
+
+      <!-- Social Section -->
+      <div class="col-12 col-md-3 mb-3 mb-md-0">
+        <h5 class="fw-bold">Social</h5>
+        <ul class="list-unstyled">
+          <li><a href="https://github.com/ayushsingh919" target="_blank" rel="noopener" class="text-decoration-none"><i class="bi bi-github me-1"></i>GitHub</a></li>
+          <li><a href="https://instagram.com/ayushhsingh_919" target="_blank" rel="noopener" class="text-decoration-none"><i class="bi bi-instagram me-1"></i>Instagram</a></li>
+          <!-- Add more social links as needed -->
+        </ul>
+      </div>
     </div>
     <div class="row">
       <div class="col-12 text-center mt-3">
@@ -848,37 +841,41 @@
     const floatingLoginContainer = document.getElementById('floatingLoginContainer');
     const floatingLogoutContainer = document.getElementById('floatingLogoutContainer');
     const floatingLogoutBtn = document.getElementById('floatingLogoutBtn');
+    const siteName = document.querySelector('.sitename');
 
-    // Function to update UI based on authentication state
-    function updateUIForUser(user) {
+    function updateNavbarUser(user) {
       if (user) {
-        // User is logged in
-        // Update profile picture with user's photo
+        // Set name
+        siteName.textContent = user.displayName || (user.email ? user.email.split('@')[0] : 'User');
+        // Set photo
         if (user.photoURL) {
           profileImage.src = user.photoURL;
+        } else {
+          profileImage.src = 'assets/img/pfp.jpg';
         }
-        
-        // Hide login button
-        if (floatingLoginContainer) {
-          floatingLoginContainer.style.display = 'none';
-        }
-        
-        // Show logout button
-        floatingLogoutContainer.style.display = 'block';
       } else {
-        // User is not logged in
-        // Reset profile picture to default
+        // Default
+        siteName.textContent = 'Ayush Kumar Singh';
         profileImage.src = 'assets/img/pfp.jpg';
-        
-        // Show login button
-        if (floatingLoginContainer) {
-          floatingLoginContainer.style.display = 'block';
-        }
-        
-        // Hide logout button
-        floatingLogoutContainer.style.display = 'none';
       }
     }
+
+    function updateAuthButtons(user) {
+      const loginBtn = document.getElementById('navbarLoginBtn');
+      const logoutBtn = document.getElementById('navbarLogoutBtn');
+      if (user) {
+        loginBtn.style.display = 'none';
+        logoutBtn.style.display = 'flex';
+      } else {
+        loginBtn.style.display = 'flex';
+        logoutBtn.style.display = 'none';
+      }
+    }
+
+    auth.onAuthStateChanged(function(user) {
+      updateNavbarUser(user);
+      updateAuthButtons(user);
+    });
 
     // Logout functionality
     if (floatingLogoutBtn) {
@@ -925,11 +922,187 @@
           });
       });
     }
+  </script>
 
-    // Listen for authentication state changes
-    auth.onAuthStateChanged((user) => {
-      updateUIForUser(user);
+  <style>
+    /* Modern Gorgeous Button Styles */
+    .modern-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 1.08rem;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 0.7rem 2.2rem;
+      box-shadow: 0 4px 24px rgba(56,189,248,0.10), 0 1.5px 6px rgba(0,0,0,0.07);
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
+      outline: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .modern-btn .btn-icon {
+      font-size: 1.25em;
+      display: flex;
+      align-items: center;
+    }
+    .login-btn {
+      background: linear-gradient(90deg, #38bdf8 0%, #0ea5e9 100%);
+      color: #fff;
+      box-shadow: 0 2px 12px rgba(56,189,248,0.18);
+    }
+    .login-btn:hover, .login-btn:focus {
+      background: linear-gradient(90deg, #0ea5e9 0%, #38bdf8 100%);
+      color: #fff;
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 6px 24px rgba(56,189,248,0.22);
+    }
+    .signup-btn {
+      background: linear-gradient(90deg, #f472b6 0%, #38bdf8 100%);
+      color: #fff;
+      box-shadow: 0 2px 12px rgba(244,114,182,0.13);
+    }
+    .signup-btn:hover, .signup-btn:focus {
+      background: linear-gradient(90deg, #38bdf8 0%, #f472b6 100%);
+      color: #fff;
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 6px 24px rgba(244,114,182,0.18);
+    }
+    .logout-btn {
+      background: linear-gradient(90deg, #f43f5e 0%, #f59e42 100%);
+      color: #fff;
+      border-radius: 999px;
+      padding: 0.7rem 2.2rem;
+      font-weight: 700;
+      border: none;
+      box-shadow: 0 2px 12px rgba(244,63,94,0.13);
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
+      cursor: pointer;
+    }
+    .logout-btn:hover, .logout-btn:focus {
+      background: linear-gradient(90deg, #f59e42 0%, #f43f5e 100%);
+      color: #fff;
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 6px 24px rgba(244,63,94,0.18);
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(24,24,27,0.85);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.2s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .modal-content {
+      background: #23232a;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(56,189,248,0.13);
+      padding: 2.5rem 2rem 2rem 2rem;
+      min-width: 340px;
+      max-width: 95vw;
+      position: relative;
+      color: #fff;
+      text-align: center;
+    }
+    .modal-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      color: #38bdf8;
+    }
+    .modal-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .modal-form input {
+      padding: 0.8rem 1.1rem;
+      border-radius: 8px;
+      border: 1.5px solid #38bdf8;
+      background: #18181b;
+      color: #fff;
+      font-size: 1rem;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+    .modal-form input:focus {
+      outline: none;
+      border-color: #f472b6;
+      box-shadow: 0 0 0 2px #f472b6;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1.1rem;
+      right: 1.1rem;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .modal-close:hover {
+      color: #f472b6;
+    }
+    .modal-success {
+      margin-top: 1.2rem;
+      color: #38bdf8;
+      font-weight: 600;
+      font-size: 1.1rem;
+      background: #18181b;
+      border-radius: 8px;
+      padding: 0.8rem 1.1rem;
+      border: 1.5px solid #38bdf8;
+      box-shadow: 0 2px 8px rgba(56,189,248,0.10);
+    }
+    @media (max-width: 500px) {
+      .modal-content { min-width: 90vw; padding: 1.2rem 0.5rem; }
+      .modern-btn { padding: 0.7rem 1.2rem; font-size: 1rem; }
+    }
+  </style>
+
+  <script>
+    // Login and Signup button logic for redirecting to login.html with correct mode
+    document.getElementById('navbarLoginBtn')?.addEventListener('click', function() {
+      window.location.href = 'login.html?mode=signin';
     });
+  </script>
+
+  <!-- Signup Modal -->
+  <div id="signupModal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+      <button class="modal-close" id="closeSignupModal" aria-label="Close signup form">&times;</button>
+      <h2 class="modal-title">Create Your Account</h2>
+      <form id="signupFormModal" class="modal-form">
+        <input type="text" placeholder="Full Name" required>
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Password" required>
+        <button type="submit" class="modern-btn signup-btn w-full mt-2">
+          <span class="btn-icon"><i class="bi bi-person-plus"></i></span>
+          <span>Sign Up</span>
+        </button>
+      </form>
+      <div id="signupSuccess" class="modal-success" style="display:none;">Signup successful! 🎉</div>
+    </div>
+  </div>
+
+  <script>
+    // ... existing code ...
+    document.getElementById('navbarLogoutBtn')?.addEventListener('click', function() {
+      auth.signOut().then(() => {
+        window.location.href = 'index.html';
+      });
+    });
+    // ... existing code ...
   </script>
 
 </body>
