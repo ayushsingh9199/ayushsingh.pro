@@ -328,4 +328,44 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('signupBtn')?.addEventListener('click', () => dummyAuth('Signup'));
   document.getElementById('mobileLoginBtn')?.addEventListener('click', () => dummyAuth('Login'));
   document.getElementById('mobileSignupBtn')?.addEventListener('click', () => dummyAuth('Signup'));
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  const html = document.documentElement;
+  // Get saved theme or default to light
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  html.setAttribute('data-theme', currentTheme);
+  updateToggleButton(currentTheme);
+
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener('click', function() {
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateToggleButton(newTheme);
+      this.style.transform = 'scale(0.95)';
+      setTimeout(() => { this.style.transform = ''; }, 150);
+    });
+  }
+
+  function updateToggleButton(theme) {
+    if (!darkModeToggle) return;
+    const lightIcon = darkModeToggle.querySelector('.light-icon');
+    const darkIcon = darkModeToggle.querySelector('.dark-icon');
+    const lightText = darkModeToggle.querySelector('.light-text');
+    const darkText = darkModeToggle.querySelector('.dark-text');
+    if (theme === 'dark') {
+      if (lightIcon) lightIcon.style.display = 'inline-block';
+      if (darkIcon) darkIcon.style.display = 'none';
+      if (lightText) lightText.style.display = 'inline';
+      if (darkText) darkText.style.display = 'none';
+    } else {
+      if (lightIcon) lightIcon.style.display = 'none';
+      if (darkIcon) darkIcon.style.display = 'inline-block';
+      if (lightText) lightText.style.display = 'none';
+      if (darkText) darkText.style.display = 'inline';
+    }
+  }
 }); 
