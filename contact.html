@@ -1006,6 +1006,43 @@
         font-size: 2rem;
       }
     }
+
+    #ask-ayush-widget {
+      position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+    }
+    #ask-ayush-btn {
+      background: linear-gradient(90deg, #6366f1, #38bdf8);
+      color: #fff; border: none; border-radius: 50px; padding: 16px 24px;
+      font-size: 1.1rem; font-weight: 700; box-shadow: 0 4px 24px #6366f155;
+      cursor: pointer; transition: background 0.2s, transform 0.2s;
+    }
+    #ask-ayush-btn:hover { background: linear-gradient(90deg, #38bdf8, #6366f1); transform: scale(1.05);}
+    #ask-ayush-chat {
+      width: 340px; max-width: 95vw; background: rgba(255,255,255,0.97);
+      border-radius: 18px; box-shadow: 0 8px 32px #6366f133;
+      padding: 0; margin-top: 12px; display: flex; flex-direction: column;
+      overflow: hidden; border: 1.5px solid #6366f1;
+    }
+    #ask-ayush-chat.hidden { display: none; }
+    .chat-header {
+      background: linear-gradient(90deg, #6366f1, #38bdf8);
+      color: #fff; padding: 14px 18px; font-weight: 700; display: flex; justify-content: space-between; align-items: center;
+    }
+    #close-ayush-chat { background: none; border: none; color: #fff; font-size: 1.3rem; cursor: pointer;}
+    .chat-messages {
+      padding: 16px; height: 220px; overflow-y: auto; background: #f8fafc;
+      font-size: 1rem; color: #222; display: flex; flex-direction: column; gap: 10px;
+    }
+    .ayush-msg { background: #6366f1; color: #fff; align-self: flex-start; border-radius: 12px 12px 12px 4px; padding: 8px 14px; max-width: 80%;}
+    .user-msg { background: #e0e7ff; color: #222; align-self: flex-end; border-radius: 12px 12px 4px 12px; padding: 8px 14px; max-width: 80%;}
+    #ayush-form { display: flex; border-top: 1px solid #e5e7eb; }
+    #ayush-input { flex: 1; border: none; padding: 12px; font-size: 1rem; border-radius: 0 0 0 12px; outline: none;}
+    #ayush-form button { background: #6366f1; color: #fff; border: none; border-radius: 0 0 12px 0; padding: 0 18px; font-size: 1rem; cursor: pointer;}
+    #ayush-form button:hover { background: #38bdf8;}
+    @media (max-width: 500px) {
+      #ask-ayush-chat { width: 98vw; right: 0; left: 0; }
+    }
   </style>
 </head>
 <body>
@@ -1013,7 +1050,7 @@
     <i class="header-toggle d-xl-none bi bi-list"></i>
 
     <div class="profile-img text-center">
-      <img src="assets/img/pfp.jpg" alt="Profile" class="img-fluid rounded-circle" id="profileImage">
+      <img src="assets/img/pfp.jpg" loading="lazy" alt="Profile" class="img-fluid rounded-circle" id="profileImage">
     </div>
 
     <a href="index.html" class="logo d-flex align-items-center justify-content-center">
@@ -1155,7 +1192,7 @@
             <div class="form-container contact-glass-card" data-aos="fade-up">
               <div class="form-header text-center">
                 <div class="form-header-icon animated-avatar" style="margin-bottom: 0.5rem;">
-                  <img src="assets/img/pfp.jpg" alt="Avatar" style="width: 60px; height: 60px; border-radius: 50%; box-shadow: 0 4px 24px rgba(20,157,221,0.18); animation: float 2.5s ease-in-out infinite, avatarGlow 2.5s ease-in-out infinite;">
+                  <img src="assets/img/pfp.jpg" loading="lazy" alt="Avatar" style="width: 60px; height: 60px; border-radius: 50%; box-shadow: 0 4px 24px rgba(20,157,221,0.18); animation: float 2.5s ease-in-out infinite, avatarGlow 2.5s ease-in-out infinite;">
                 </div>
                 <h2 style="font-weight: 800; letter-spacing: -1px; font-size: 2.2rem; margin-bottom: 0.2rem;">Send Me a Message</h2>
                 <p class="animated-typing">Tell me about your project and I'll get back to you within 24 hours</p>
@@ -1616,6 +1653,66 @@
         setTimeout(() => loader.style.display = 'none', 400);
       }
     });
+  </script>
+
+  <!-- Ask Ayush Chat Widget -->
+  <div id="ask-ayush-widget">
+    <button id="ask-ayush-btn">💬 Ask Ayush</button>
+    <div id="ask-ayush-chat" class="hidden">
+      <div class="chat-header">
+        <span>Ask Ayush AI</span>
+        <button id="close-ayush-chat">&times;</button>
+      </div>
+      <div class="chat-messages" id="ayush-messages"></div>
+      <form id="ayush-form">
+        <input type="text" id="ayush-input" placeholder="Ask me anything..." autocomplete="off" required />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const widget = document.getElementById('ask-ayush-widget');
+    const btn = document.getElementById('ask-ayush-btn');
+    const chat = document.getElementById('ask-ayush-chat');
+    const closeBtn = document.getElementById('close-ayush-chat');
+    const form = document.getElementById('ayush-form');
+    const input = document.getElementById('ayush-input');
+    const messages = document.getElementById('ayush-messages');
+
+    btn.onclick = () => chat.classList.toggle('hidden');
+    closeBtn.onclick = () => chat.classList.add('hidden');
+
+    form.onsubmit = async (e) => {
+      e.preventDefault();
+      const userMsg = input.value.trim();
+      if (!userMsg) return;
+      messages.innerHTML += `<div class="user-msg">${userMsg}</div>`;
+      input.value = '';
+      messages.innerHTML += `<div class="ayush-msg" id="ayush-typing">Ayush is typing<span class="dot">.</span></div>`;
+      messages.scrollTop = messages.scrollHeight;
+
+      // Send to backend
+      try {
+        const res = await fetch('http://localhost:3000/ask-ayush', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ question: userMsg })
+        });
+        const data = await res.json();
+        document.getElementById('ayush-typing').remove();
+        if (data.answer) {
+          messages.innerHTML += `<div class="ayush-msg">${data.answer}</div>`;
+        } else {
+          messages.innerHTML += `<div class="ayush-msg">Sorry, I couldn't answer that.</div>`;
+        }
+        messages.scrollTop = messages.scrollHeight;
+      } catch (err) {
+        document.getElementById('ayush-typing').remove();
+        messages.innerHTML += `<div class="ayush-msg">Error: ${err.message}</div>`;
+        messages.scrollTop = messages.scrollHeight;
+      }
+    };
   </script>
 </body>
 </html>
