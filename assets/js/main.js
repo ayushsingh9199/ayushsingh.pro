@@ -648,31 +648,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // SVG Bouncing Balls Loader Animation
   window.addEventListener('load', function() {
     const loader = document.getElementById('entry-loader');
-    const svg = document.getElementById('ayush-loader-svg');
-    
-    if (loader && svg && typeof gsap !== 'undefined') {
-      const balls = [
-        svg.getElementById('ball1'), 
-        svg.getElementById('ball2'), 
-        svg.getElementById('ball3'), 
-        svg.getElementById('ball4')
-      ];
-      
-      // Bounce animation, then fade out loader quickly
-      gsap.to(balls, { 
-        y: -32, 
-        duration: 0.28, 
-        yoyo: true, 
-        repeat: 1, 
-        stagger: 0.08, 
-        ease: 'power1.inOut', 
-        onComplete: hideLoader 
-      });
-      
-      function hideLoader() {
-        loader.classList.add('fade-out');
-        setTimeout(() => loader.style.display = 'none', 400);
-      }
+    if (loader) {
+      loader.classList.add('fade-out');
+      setTimeout(() => loader.style.display = 'none', 400);
     }
   });
 

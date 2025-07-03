@@ -45,17 +45,31 @@
   <link href="assets/css/components.css" rel="stylesheet">
   
   <!-- SVG Morph Loader -->
-  <div id="entry-loader"
-    style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(255,255,255,0.97);display:flex;align-items:center;justify-content:center;z-index:99999;transition:opacity 0.6s;">
-    <svg id="ayush-loader-svg" width="320" height="100" viewBox="0 0 320 100">
-      <g id="balls">
-        <circle id="ball1" cx="50" cy="70" r="18" fill="#ff595e" />
-        <circle id="ball2" cx="110" cy="70" r="18" fill="#ffca3a" />
-        <circle id="ball3" cx="170" cy="70" r="18" fill="#8ac926" />
-        <circle id="ball4" cx="230" cy="70" r="18" fill="#1982c4" />
-      </g>
-    </svg>
-  </div>
+  <style>
+    /* Loader Animation */
+    #ball1 { animation: bounce 1.4s ease-in-out infinite both; }
+    #ball2 { animation: bounce 1.4s ease-in-out infinite both 0.1s; }
+    #ball3 { animation: bounce 1.4s ease-in-out infinite both 0.2s; }
+    #ball4 { animation: bounce 1.4s ease-in-out infinite both 0.3s; }
+    
+    @keyframes bounce {
+      0%, 80%, 100% { 
+        transform: scale(0);
+      } 
+      40% { 
+        transform: scale(1.0);
+      }
+    }
+    
+    [data-theme="dark"] #entry-loader {
+      background: rgba(24, 26, 27, 0.97);
+    }
+    
+    #entry-loader.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+  </style>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -420,22 +434,9 @@
       transform: translateY(-2px) scale(1.04);
       box-shadow: 0 6px 24px rgba(244,63,94,0.18);
     }
-  </style>
-</head>
+  </head>
 
 <body class="index-page">
-  <!-- SVG Morph Loader -->
-  <div id="entry-loader" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(255,255,255,0.97);display:flex;align-items:center;justify-content:center;z-index:99999;transition:opacity 0.6s;">
-    <svg id="ayush-loader-svg" width="320" height="100" viewBox="0 0 320 100">
-      <g id="balls">
-        <circle id="ball1" cx="50" cy="70" r="18" fill="#ff595e" />
-        <circle id="ball2" cx="110" cy="70" r="18" fill="#ffca3a" />
-        <circle id="ball3" cx="170" cy="70" r="18" fill="#8ac926" />
-        <circle id="ball4" cx="230" cy="70" r="18" fill="#1982c4" />
-      </g>
-    </svg>
-  </div>
-
   <header id="header" class="header d-flex flex-column">
     <i class="header-toggle d-xl-none bi bi-list"></i>
     <div class="profile-img text-center">
@@ -815,6 +816,14 @@
         setTimeout(() => loader.style.display = 'none', 400);
       }
     });
+    // Fallback: forcibly hide loader after 5 seconds
+    setTimeout(function() {
+      const loader = document.getElementById('entry-loader');
+      if (loader && loader.style.display !== 'none') {
+        loader.classList.add('fade-out');
+        setTimeout(() => loader.style.display = 'none', 400);
+      }
+    }, 5000);
   </script>
 </body>
 

@@ -5555,3 +5555,11 @@ body.contact-modern {
   #ask-ayush-chat { min-width: 98vw; right: 0; left: 0; }
   #ask-ayush-widget { right: 2vw; bottom: 2vw; }
 }
+
+window.addEventListener('load', function() {
+  const loader = document.getElementById('entry-loader');
+  if (loader) {
+    loader.classList.add('fade-out');
+    setTimeout(() => loader.style.display = 'none', 400);
+  }
+});
