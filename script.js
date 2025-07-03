@@ -1,3 +1,85 @@
+// Smooth Scrolling with Animations
+document.addEventListener('DOMContentLoaded', function() {
+    // Enhanced smooth scrolling for anchor links
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    
+    anchorLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                // Add smooth scroll animation
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Add active state to navigation
+                const navLinks = document.querySelectorAll('.navmenu a');
+                navLinks.forEach(navLink => navLink.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Close mobile menu if open
+                const header = document.querySelector('.header');
+                if (header && header.classList.contains('header-show')) {
+                    header.classList.remove('header-show');
+                }
+            }
+        });
+    });
+    
+    // Enhanced scroll progress bar with smooth animation
+    const scrollProgressBar = document.getElementById('scrollProgressBar');
+    if (scrollProgressBar) {
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            
+            scrollProgressBar.style.width = scrollPercent + '%';
+        });
+    }
+    
+
+    
+    // Enhanced AOS animations with smooth scrolling
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out-cubic',
+            once: true,
+            offset: 100,
+            delay: 0
+        });
+    }
+    
+    // Smooth section transitions
+    const sections = document.querySelectorAll('section');
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    sections.forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(30px)';
+        section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        sectionObserver.observe(section);
+    });
+});
+
 // DOM Elements
 const authContainer = document.querySelector('.auth-container');
 const switchToSignupBtns = document.querySelectorAll('.switch-to-signup');

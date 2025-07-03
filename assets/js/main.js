@@ -224,17 +224,7 @@
     });
   });
 
-  /**
-   * Scroll top button
-   */
-  let scrolltop = select('.scroll-top')
-  if (scrolltop) {
-    const toggleScrolltop = () => {
-      window.scrollY > 100 ? scrolltop.classList.add('active') : scrolltop.classList.remove('active')
-    }
-    window.addEventListener('load', toggleScrolltop)
-    onscroll(document, toggleScrolltop)
-  }
+
 
   /**
    * Preloader with extended timing
